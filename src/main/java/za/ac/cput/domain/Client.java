@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 /*
-
+Likhona Nxusani
  */
 @Entity
 public class Client {

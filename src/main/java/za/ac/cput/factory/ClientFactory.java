@@ -5,7 +5,7 @@ import za.ac.cput.domain.Contact;
 import za.ac.cput.util.Helper;
 
 /*
-
+Likhona Nxusani
  */
 public class ClientFactory {
     public static Client buildClient(String clientId, String firstName, String lastName,
@@ -20,14 +20,14 @@ public class ClientFactory {
     }
 
     public static Client buildClient(String clientId, String firstName, String lastName,
-                                     String email, String mobile, String workTelephone){
+                                     String email, String mobileNumber, String workTelephone){
         if (Helper.isNullOrEmpty(clientId) || Helper.isNullOrEmpty(firstName)
                 || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(email)
-                || Helper.isNullOrEmpty(mobile) || Helper.isNullOrEmpty(workTelephone))
+                || Helper.isNullOrEmpty(mobileNumber) || Helper.isNullOrEmpty(workTelephone))
             return null;
 
         Contact contact = new Contact.Builder().setEmail(email)
-                .setMobileNumber(mobile)
+                .setMobileNumber(mobileNumber)
                 .setWorkTelephone(workTelephone)
                 .build();
 
