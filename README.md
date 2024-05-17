@@ -1,2 +1,2 @@
-![Booking System UML Diagram](Images/DesktopApp.png)
+![Booking System UML Diagram](Images/DesktopApp.drawio.png)
 

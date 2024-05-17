@@ -1,34 +1,32 @@
 package za.ac.cput.domain;
+//218130260AZJoka
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
-
 @Entity
 public class Contact {
     @Id
     private String email;
-    private String mobile;
+    private String mobileNumber;
     private String workTelephone;
 
-    protected Contact(){
-
+    protected Contact() {
     }
 
-    public Contact(Builder builder){
-        this.email = builder.email;
-        this.mobile = builder.mobile;
-        this.workTelephone = builder.workTelephone;
+    private Contact(Builder builder) {
+       this.email = builder.email;
+       this.mobileNumber = builder.mobileNumber;
+       this.workTelephone = builder.workTelephone;
     }
-
 
     public String getEmail() {
         return email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
     public String getWorkTelephone() {
@@ -38,27 +36,29 @@ public class Contact {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Contact contact)) return false;
-        return Objects.equals(getEmail(), contact.getEmail()) && Objects.equals(getMobile(), contact.getMobile()) && Objects.equals(getWorkTelephone(), contact.getWorkTelephone());
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(email, contact.email) && Objects.equals(mobileNumber, contact.mobileNumber) && Objects.equals(workTelephone, contact.workTelephone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getEmail(), getMobile(), getWorkTelephone());
+        return Objects.hash(email, mobileNumber, workTelephone);
     }
 
     @Override
     public String toString() {
         return "Contact{" +
                 "email='" + email + '\'' +
-                ", mobile='" + mobile + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
                 ", workTelephone='" + workTelephone + '\'' +
                 '}';
     }
 
     public static class Builder {
+
         private String email;
-        private String mobile;
+        private String mobileNumber;
         private String workTelephone;
 
         public Builder setEmail(String email) {
@@ -66,8 +66,8 @@ public class Contact {
             return this;
         }
 
-        public Builder setMobile(String mobile) {
-            this.mobile = mobile;
+        public Builder setMobileNumber(String mobileNumber) {
+            this.mobileNumber = mobileNumber;
             return this;
         }
 
@@ -76,15 +76,17 @@ public class Contact {
             return this;
         }
 
-        public Builder copy(Contact contact){
+        public Builder copy(Contact contact) {
             this.email = contact.email;
-            this.mobile = contact.mobile;
-            this.workTelephone = contact.workTelephone;
+            this.mobileNumber = contact.mobileNumber;
+            this.workTelephone =contact.workTelephone;
             return this;
         }
 
-        public Contact build(){
+        public Contact build() {
             return new Contact(this);
         }
+
     }
+
 }
