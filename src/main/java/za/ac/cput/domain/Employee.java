@@ -4,14 +4,12 @@ package za.ac.cput.domain;
 Aphelele Zimkhita Joka 218130260
  */
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 @Entity
 public class Employee {
+    @Id
     private String employeeID;
     private String firstName;
     private String lastName;
