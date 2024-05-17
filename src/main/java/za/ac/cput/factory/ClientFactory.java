@@ -27,7 +27,7 @@ public class ClientFactory {
             return null;
 
         Contact contact = new Contact.Builder().setEmail(email)
-                .setMobile(mobile)
+                .setMobileNumber(mobile)
                 .setWorkTelephone(workTelephone)
                 .build();
 
