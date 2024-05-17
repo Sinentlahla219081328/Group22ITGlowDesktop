@@ -4,13 +4,23 @@ package za.ac.cput.domain;
 Aphelele Zimkhita Joka 218130260
  */
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
 import java.util.Objects;
+@Entity
 
 public class Employee {
     private String employeeID;
     private String firstName;
     private String lastName;
     private String userName;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "email")
+    private Contact contact;
 
     protected Employee() {
 
