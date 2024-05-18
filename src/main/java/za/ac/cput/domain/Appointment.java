@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Appointment {
     @Id
     private String appointmentID;
-    private String clientID;
+    private String clientId;
     private String employeeID;
     private Date date;
     private Time time;
@@ -26,7 +26,7 @@ public class Appointment {
 
     private Appointment(Builder builder) {
         this.appointmentID = builder.appointmentID;
-        this.clientID = builder.clientID;
+        this.clientId = builder.clientId;
         this.employeeID = builder.employeeID;
         this.date = builder.date;
         this.time = builder.time;
@@ -37,8 +37,8 @@ public class Appointment {
         return appointmentID;
     }
 
-    public String getClientID() {
-        return clientID;
+    public String getClientId() {
+        return clientId;
     }
 
     public String getEmployeeID() {
@@ -58,19 +58,19 @@ public class Appointment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Appointment that = (Appointment) o;
-        return Objects.equals(appointmentID, that.appointmentID) && Objects.equals(clientID, that.clientID) && Objects.equals(employeeID, that.employeeID) && Objects.equals(date, that.date) && Objects.equals(time, that.time);
+        return Objects.equals(appointmentID, that.appointmentID) && Objects.equals(clientId, that.clientId) && Objects.equals(employeeID, that.employeeID) && Objects.equals(date, that.date) && Objects.equals(time, that.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appointmentID, clientID, employeeID, date, time);
+        return Objects.hash(appointmentID, clientId, employeeID, date, time);
     }
 
     @Override
     public String toString() {
         return "Appointment{" +
                 "appointmentID='" + appointmentID + '\'' +
-                ", clientID='" + clientID + '\'' +
+                ", clientID='" + clientId + '\'' +
                 ", employeeID='" + employeeID + '\'' +
                 ", date=" + date +
                 ", time=" + time +
@@ -80,7 +80,7 @@ public class Appointment {
 
     public static class Builder {
         private String appointmentID;
-        private String clientID;
+        private String clientId;
         private String employeeID;
         private Date date;
         private Time time;
@@ -90,8 +90,8 @@ public class Appointment {
             return this;
         }
 
-        public Builder setClientID(String clientID) {
-            this.clientID = clientID;
+        public Builder setClientID(String clientId) {
+            this.clientId = clientId;
             return this;
         }
 
@@ -114,7 +114,7 @@ public class Appointment {
         public Builder copy(Appointment appointment) {
 
                     this.appointmentID = appointment.appointmentID;
-                    this.clientID = appointment.clientID;
+                    this.clientId = appointment.clientId;
                     this.employeeID = appointment.employeeID;
                     this.date = appointment.date;
                     this.time = appointment.time;
