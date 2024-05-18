@@ -12,20 +12,20 @@ import java.util.Objects;
 @Entity
 public class Sales {
     @Id
- private String salesId;
+ private String salesID;
  private String employeeID;
  private String salesDescription;
 
  protected Sales(){}
 
     private Sales(Builder builder) {
-        this.salesId = builder.salesId;
+        this.salesID = builder.salesID;
         this.employeeID = builder.employeeID;
         this.salesDescription = builder.salesDescription;
     }
 
         public String getSalesId () {
-            return salesId;
+            return salesID;
         }
 
         public String getEmployeeID () {
@@ -41,29 +41,29 @@ public class Sales {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Sales sales = (Sales) o;
-            return Objects.equals(salesId, sales.salesId) && Objects.equals(employeeID, sales.employeeID) && Objects.equals(salesDescription, sales.salesDescription);
+            return Objects.equals(salesID, sales.salesID) && Objects.equals(employeeID, sales.employeeID) && Objects.equals(salesDescription, sales.salesDescription);
         }
 
         @Override
         public int hashCode () {
-            return Objects.hash(salesId, employeeID, salesDescription);
+            return Objects.hash(salesID, employeeID, salesDescription);
         }
 
         @Override
         public String toString () {
             return "Sales{" +
-                    "salesId='" + salesId + '\'' +
+                    "salesId='" + salesID + '\'' +
                     ", employeeID='" + employeeID + '\'' +
                     ", salesDescription='" + salesDescription + '\'' +
                     '}';
         }
         public static class Builder {
-            private String salesId;
+            private String salesID;
             private String employeeID;
             private String salesDescription;
 
-            public Builder setSalesId(String salesId) {
-                this.salesId = salesId;
+            public Builder setSalesID(String salesID) {
+                this.salesID = salesID;
                 return this;
             }
 
@@ -79,7 +79,7 @@ public class Sales {
 
             public Builder copy(Sales sales) {
 
-                this.salesId = sales.salesId;
+                this.salesID = sales.salesID;
                 this.employeeID = sales.employeeID;
                 this.salesDescription = sales.salesDescription;
                 return this;
