@@ -6,11 +6,15 @@ Sinentlahla Pindani 219081328
  */
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
-
+@Entity
 public class Appointment {
+    @Id
     private String appointmentID;
     private String clientID;
     private String employeeID;
