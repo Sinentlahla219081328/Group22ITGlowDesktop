@@ -1,6 +1,6 @@
 package za.ac.cput.domain;
+//218130260AZJoka
 
- 218130260AZJoka
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -17,7 +17,7 @@ public class Contact {
 
     private Contact(Builder builder) {
        this.email = builder.email;
-       this.mobile = builder.mobile;
+       this.mobileNumber = builder.mobileNumber;
        this.workTelephone = builder.workTelephone;
     }
 
