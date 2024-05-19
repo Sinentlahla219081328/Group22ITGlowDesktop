@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
-    Employee findEmployeeByFirstName(String firstName);
+    Employee findEmployeeByEmployeeId(String employeeId);
+
 
 }
