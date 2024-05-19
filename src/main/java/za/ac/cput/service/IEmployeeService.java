@@ -1,4 +1,11 @@
 package za.ac.cput.service;
 
-public interface IEmployeeService {
+import za.ac.cput.domain.Employee;
+
+import java.util.List;
+
+public interface IEmployeeService extends  IService<Employee, String>{
+
+    List<Employee> getall();
+
 }
