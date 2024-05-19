@@ -36,6 +36,11 @@ public class SalesService implements ISalesService{
         return null;
     }
 
+    @Override
+    public void delete(String id) {
+        repository.deleteById(id);
+    }
+
    /* @Override
     public boolean delete(String salesID) {
         if (this.repository.existsById(salesID)){
