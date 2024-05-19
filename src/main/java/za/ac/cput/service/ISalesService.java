@@ -1,4 +1,10 @@
 package za.ac.cput.service;
 
-public interface ISalesService {
+
+import za.ac.cput.domain.Sales;
+
+import java.util.List;
+
+public interface ISalesService extends IService<Sales, String>{
+    List<Sales> getAll();
 }
