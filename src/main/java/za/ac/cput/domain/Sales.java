@@ -24,7 +24,7 @@ public class Sales {
         this.salesDescription = builder.salesDescription;
     }
 
-        public String getSalesId () {
+        public String getSalesID () {
             return salesID;
         }
 
