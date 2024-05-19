@@ -22,10 +22,11 @@ public class ClientFactory {
     public static Client buildClient(String clientId, String firstName, String lastName,
                                      String email, String mobileNumber, String workTelephone){
         if (Helper.isNullOrEmpty(clientId) || Helper.isNullOrEmpty(firstName)
-                || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(email)
-                || Helper.isNullOrEmpty(mobileNumber) || Helper.isNullOrEmpty(workTelephone))
+                || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(mobileNumber)
+                || Helper.isNullOrEmpty(workTelephone))
             return null;
-
+        if (Helper.isValidEmail(email))
+            return null;
         Contact contact = new Contact.Builder().setEmail(email)
                 .setMobileNumber(mobileNumber)
                 .setWorkTelephone(workTelephone)
