@@ -90,7 +90,7 @@ public class Appointment {
             return this;
         }
 
-        public Builder setClientID(String clientId) {
+        public Builder setClientId(String clientId) {
             this.clientId = clientId;
             return this;
         }

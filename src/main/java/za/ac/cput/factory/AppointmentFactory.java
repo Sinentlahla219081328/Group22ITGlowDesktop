@@ -20,7 +20,7 @@ public class AppointmentFactory {
             return null;
 
         return new Appointment.Builder().setAppointmentID(appointmentID)
-                .setClientID(clientId)
+                .setClientId(clientId)
                 .setEmployeeID(employeeID)
                 .setDate(date)
                 .setTime(time)
