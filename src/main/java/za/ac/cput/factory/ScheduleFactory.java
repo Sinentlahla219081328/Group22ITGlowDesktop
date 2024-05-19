@@ -12,7 +12,6 @@ import java.util.Date;
 
 public class ScheduleFactory {
 
-
     public static Schedule createSchedule(String employeeId, String scheduleId,
                                           Date scheduleDate, Time startTime, Time endtime){
         return new Schedule.Builder()
