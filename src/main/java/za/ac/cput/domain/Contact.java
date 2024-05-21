@@ -15,7 +15,7 @@ public class Contact {
     protected Contact() {
     }
 
-    private Contact(Builder builder) {
+    public Contact(Builder builder) {
        this.email = builder.email;
        this.mobileNumber = builder.mobileNumber;
        this.workTelephone = builder.workTelephone;
