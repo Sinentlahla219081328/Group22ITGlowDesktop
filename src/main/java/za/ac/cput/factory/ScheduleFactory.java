@@ -12,14 +12,14 @@ import java.util.Date;
 
 public class ScheduleFactory {
 
-    public static Schedule createSchedule(String employeeId, String scheduleId,
-                                          Date scheduleDate, Time startTime, Time endtime){
+
+   public static Schedule buildSchedule(String scheduleId, String employeeId, Date scheduleDate, Time startTime, Time endTime) {
         return new Schedule.Builder()
-                .setEmployeeId(employeeId)
                 .setScheduleId(scheduleId)
+                .setEmployeeId(employeeId)
                 .setScheduleDate(scheduleDate)
                 .setStartTime(startTime)
-                .setEndTime(endtime)
+                .setEndTime(endTime)
                 .build();
     }
 

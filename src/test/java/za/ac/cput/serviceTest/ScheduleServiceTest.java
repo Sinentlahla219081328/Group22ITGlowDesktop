@@ -1,63 +1,67 @@
 package za.ac.cput.serviceTest;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.Client;
 import za.ac.cput.domain.Schedule;
-import za.ac.cput.factory.ClientFactory;
 import za.ac.cput.factory.ScheduleFactory;
-import za.ac.cput.service.ClientService;
 import za.ac.cput.service.ScheduleService;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
 class ScheduleServiceTest {
 
+
     @Autowired
-    ScheduleService service;
+    private ScheduleService scheduleService;
 
-    Schedule schedule;
-    @Test
-    void a_setup() {
-        schedule = ScheduleFactory.createSchedule("246810", "Sipho",
-                23, 12, 14);
-        assertNotNull(schedule);
-        System.out.println(schedule);
+    private static Schedule schedule;
+
+    @BeforeEach
+    void setUp() {
+        Date scheduleDate = Date.valueOf("2024-05-19");
+        Time startTime = Time.valueOf(LocalTime.of(9, 0));
+        Time endTime = Time.valueOf(LocalTime.of(17, 0));
+
+        schedule = ScheduleFactory.buildSchedule("1", "EMP001", scheduleDate, startTime, endTime);
     }
 
     @Test
-    void b_create() {
-        Schedule created = service.create(schedule);
-        assertNotNull(created);
-        System.out.println(created);
+    void create() {
+        Schedule createdSchedule = scheduleService.create(schedule);
+        assertNotNull(createdSchedule);
+        System.out.println("Created Schedule: " + createdSchedule);
     }
 
     @Test
-    void c_read() {
-        Schedule read = service.read(schedule.getScheduleId());
-        assertNotNull(read);
-        System.out.println(read);
+    void read() {
+        Schedule readSchedule = scheduleService.read(schedule.getScheduleId());
+        assertNotNull(readSchedule);
+        System.out.println(readSchedule);
     }
 
     @Test
-    void d_update() {
-        Schedule newSchedule = new Client.Builder().copy(schedule)
-                .setFirstName("")
-                .build();
-        Schedule updated = service.update(newSchedule);
-        assertNotNull(updated);
-        System.out.println(updated);
+    void update() {
+        Schedule updatedSchedule = new Schedule.Builder().copy(schedule).setEmployeeId("EMP002").build();
+        Schedule newSchedule = scheduleService.update(updatedSchedule);
+        assertNotNull(newSchedule);
+        System.out.println(newSchedule);
     }
 
-    @Test
-    @Disabled
-    void f_delete() {
-    }
 
     @Test
-    void e_getAll() {
-        System.out.println(service.getAll());
+    void getAll() {
+        System.out.println(scheduleService.getAll());
     }
+
+
 }

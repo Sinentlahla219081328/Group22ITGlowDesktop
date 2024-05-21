@@ -5,41 +5,39 @@ import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Schedule;
 import za.ac.cput.repository.ScheduleRepository;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import java.util.List;
 @Service
-public class ScheduleService implements IScheduleService{
-
-    private ScheduleRepository repository;
+public class ScheduleService implements IScheduleService {
 
     @Autowired
-    ScheduleService (ScheduleRepository repository){
+    private ScheduleRepository repository;
+
+    public ScheduleService (ScheduleRepository repository) {
         this.repository = repository;
     }
-
-    @Override
-    public Set<Schedule> getAll() {
-        return repository.findAll().stream().collect(Collectors.toSet());
-    }
-
     @Override
     public Schedule create(Schedule schedule) {
-        return repository.save(schedule);
+    return repository.save(schedule);
     }
 
     @Override
-    public Schedule read(String s) {
-        return this.repository.findById(s).orElse(null);
+    public Schedule read(String id) {
+    return repository.findById(id).orElse(null);
     }
 
     @Override
     public Schedule update(Schedule schedule) {
-        return repository.save(schedule);
+    return repository.save(schedule);
     }
 
     @Override
-    public void delete(String s) {
-        repository.deleteById(s);
+    public void delete(String id) {
+        repository.deleteById(id);
     }
+
+    @Override
+    public List<Schedule> getAll() {
+    return repository.findAll();
+    }
+
 }
