@@ -29,6 +29,11 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
+    public void delete(String id) {
+        repository.deleteById(id);
+    }
+
+    @Override
     public List<Employee> getall() {
         return repository.findAll() ;
     }
