@@ -1,13 +1,14 @@
 package za.ac.cput.domain;
-//218130260AZJoka
+/*
+Aphelele Zimkhita Joka
+ */
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.Objects;
+
 @Entity
-public class Contact implements Serializable {
+public class Contact {
     @Id
     private String email;
     private String mobileNumber;
@@ -16,6 +17,11 @@ public class Contact implements Serializable {
     protected Contact() {
     }
 
+    private Contact(Builder builder) {
+        this.email = builder.email;
+        this.mobileNumber = builder.mobileNumber;
+        this.workTelephone = builder.workTelephone;
+    }
 
     public String getEmail() {
         return email;
@@ -42,6 +48,46 @@ public class Contact implements Serializable {
         return Objects.hash(email, mobileNumber, workTelephone);
     }
 
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "email='" + email + '\'' +
+                ", mobile='" + mobileNumber + '\'' +
+                ", workTelephone='" + workTelephone + '\'' +
+                '}';
+    }
 
+    public static class Builder {
+        private String email;
+        private String mobileNumber;
+        private String workTelephone;
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setMobileNumber(String mobile) {
+            this.mobileNumber = mobile;
+            return this;
+        }
+
+        public Builder setWorkTelephone(String workTelephone) {
+            this.workTelephone = workTelephone;
+            return this;
+        }
+
+        public Builder copy(Contact contact){
+            this.email = contact.email;
+            this.mobileNumber = contact.mobileNumber;
+            this.workTelephone = contact.workTelephone;
+            return this;
+        }
+
+        public Contact build(){
+            return new Contact(this);
+        }
+    }
 }
+
 
