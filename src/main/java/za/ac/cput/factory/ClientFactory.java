@@ -25,7 +25,7 @@ public class ClientFactory {
                 || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(mobileNumber)
                 || Helper.isNullOrEmpty(workTelephone))
             return null;
-        if (Helper.isValidEmail(email))
+        if (!Helper.isValidEmail(email))
             return null;
         Contact contact = ContactFactory.buildContact(email, mobileNumber, workTelephone);
 
