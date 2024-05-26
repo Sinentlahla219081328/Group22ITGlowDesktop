@@ -4,9 +4,10 @@ package za.ac.cput.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.util.Objects;
 @Entity
-public class Contact {
+public class Contact  {
     @Id
     private String email;
     private String mobileNumber;
@@ -14,11 +15,11 @@ public class Contact {
 
     protected Contact() {
     }
+    private Contact(Builder builder){
+        this.email = builder.email;
+        this.mobileNumber = builder.mobileNumber;
+        this.workTelephone = builder.workTelephone;
 
-    public Contact(Builder builder) {
-       this.email = builder.email;
-       this.mobileNumber = builder.mobileNumber;
-       this.workTelephone = builder.workTelephone;
     }
 
     public String getEmail() {
@@ -46,17 +47,7 @@ public class Contact {
         return Objects.hash(email, mobileNumber, workTelephone);
     }
 
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "email='" + email + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", workTelephone='" + workTelephone + '\'' +
-                '}';
-    }
-
     public static class Builder {
-
         private String email;
         private String mobileNumber;
         private String workTelephone;
@@ -75,18 +66,18 @@ public class Contact {
             this.workTelephone = workTelephone;
             return this;
         }
-
-        public Builder copy(Contact contact) {
-            this.email = contact.email;
+        public Builder copy(Contact contact){
+            this.email =contact.email;
             this.mobileNumber = contact.mobileNumber;
             this.workTelephone =contact.workTelephone;
             return this;
-        }
 
+        }
         public Contact build() {
             return new Contact(this);
         }
-
     }
 
+
 }
+

@@ -23,8 +23,8 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Employee read(String employeeId) {
-        return this.repository.findById(employeeId).orElse(null);
+    public Employee read(String employeeID) {
+        return this.repository.findById(employeeID).orElse(null);
     }
 
     @Override

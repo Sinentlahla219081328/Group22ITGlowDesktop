@@ -35,6 +35,7 @@ class EmployeeServiceTest {
         Employee created1 = employeeService.create(employee1);
         assertNotNull(created1);
         System.out.println(created1);
+
         Employee created2 = employeeService.create(employee2);
         assertNotNull(created2);
         System.out.println(created2);
@@ -57,6 +58,5 @@ class EmployeeServiceTest {
     void e_getall(){
         System.out.println(employeeService.getall());
     }
-
 
 }
