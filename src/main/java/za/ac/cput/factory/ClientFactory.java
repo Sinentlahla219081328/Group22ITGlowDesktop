@@ -27,10 +27,11 @@ public class ClientFactory {
             return null;
         if (!Helper.isValidEmail(email))
             return null;
-        Contact contact = new Contact.Builder().setEmail(email)
-                .setMobileNumber(mobileNumber)
-                .setWorkTelephone(workTelephone)
-                .build();
+        Contact contact = ContactFactory.buildContact(email, mobileNumber, workTelephone);
+
+        if (contact == null) {
+            return null;
+        }
 
         return new Client.Builder().setClientId(clientId)
                 .setFirstName(firstName).setLastName(lastName)
