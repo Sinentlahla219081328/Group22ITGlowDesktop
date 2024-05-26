@@ -22,8 +22,6 @@ public class Contact  {
 
     }
 
-
-
     public String getEmail() {
         return email;
     }
