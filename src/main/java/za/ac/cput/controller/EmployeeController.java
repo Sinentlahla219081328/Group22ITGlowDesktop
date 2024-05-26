@@ -8,7 +8,6 @@ import za.ac.cput.service.EmployeeService;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
