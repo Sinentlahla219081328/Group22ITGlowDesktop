@@ -17,7 +17,7 @@ class EmployeeControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    private final String BASE_URL= "http://localhost:8080/ZimmyCapstone/employee";
+    private final String BASE_URL= "http://localhost:8080/ITGlowDesktop/employee";
     private static Employee employee;
 
     @BeforeAll

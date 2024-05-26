@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppointmentControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
-    private final String baseURL = "http://localhost:8080/Payroll/appointment";
+    private final String baseURL = "http://localhost:8080/ITGlowDesktop/appointment";
     private static Appointment appointment;
 
     @BeforeAll

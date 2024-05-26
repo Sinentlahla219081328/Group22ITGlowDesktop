@@ -27,7 +27,7 @@ class SalesControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final String baseURL = "http://localhost:8080/Payroll/sales";
+    private final String baseURL = "http://localhost:8080/ITGlowDesktop/sales";
 
     private static Sales sales;
 
