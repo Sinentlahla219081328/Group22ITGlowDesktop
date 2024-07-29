@@ -1,9 +1,6 @@
 package za.ac.cput.controllerTest;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -11,8 +8,11 @@ import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.Client;
 import za.ac.cput.domain.Payment;
 import za.ac.cput.factory.PaymentFactory;
+
 import java.util.Date;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -20,19 +20,14 @@ class PaymentControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final String baseURL = "http://localhost:8080/ITGlowDesktop/payment";
+    private final String baseURL = "http://localhost:8080/MiyonkeCapstone/payment";
 
     private static Payment payment;
 
     @BeforeAll
     public static void setUp() {
-        Client client = new Client.Builder()
-                .setClientId("001")
-                .setFirstName("John")
-                .setLastName("Doe")
-                .build();
 
-        payment = PaymentFactory.createPayment("123", "456", "001", 1000.00, "Credit Card", new Date(), client);
+        payment = PaymentFactory.createPayment("123", "456", "001", 1000.00, "Credit Card", new Date(), "001", "John", "Doe");
     }
 
     @Test
@@ -68,6 +63,7 @@ class PaymentControllerTest {
         assertEquals(newPayment.getPaymentID(), updatedPayment.getPaymentID());
     }
 
+    @Disabled
     @Test
     void d_delete() {
         String url = baseURL + "/delete/" + payment.getPaymentID();

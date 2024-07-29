@@ -6,13 +6,10 @@ Siyamthanda
  222374012
  */
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
-
-import java.util.Objects;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Payment {
@@ -25,7 +22,8 @@ public class Payment {
     private Date datePaid;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "clientId", referencedColumnName = "clientId")
     private Client client;
 
     public Payment() {
