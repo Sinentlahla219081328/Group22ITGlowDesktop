@@ -2,8 +2,8 @@ package za.ac.cput.domain;
 
 /*
 Siyamthanda
- Rolomana
- 222374012
+Rolomana
+222374012
  */
 
 import jakarta.persistence.*;
