@@ -17,17 +17,17 @@ public class ScheduleService implements IScheduleService {
     }
     @Override
     public Schedule create(Schedule schedule) {
-    return repository.save(schedule);
+        return repository.save(schedule);
     }
 
     @Override
     public Schedule read(String id) {
-    return repository.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public Schedule update(Schedule schedule) {
-    return repository.save(schedule);
+        return repository.save(schedule);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ScheduleService implements IScheduleService {
 
     @Override
     public List<Schedule> getAll() {
-    return repository.findAll();
+        return repository.findAll();
     }
 
 }

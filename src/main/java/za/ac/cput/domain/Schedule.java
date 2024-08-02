@@ -1,28 +1,34 @@
 package za.ac.cput.domain;
 
 /*
-
+Okuhle Vellem
  */
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Objects;
+import java.time.LocalDate;
+
 
 @Entity
 public class Schedule {
-@Id
-private String scheduleId;
+    @Id
+    private String scheduleId;
+    private String employeeId;
+    private LocalDate scheduleDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-private String employeeId;
-Date scheduleDate;
-Time startTime;
-Time endTime;
+    protected Schedule() {}
 
-protected Schedule(){}
+    private Schedule(Builder builder) {
+        this.scheduleId = builder.scheduleId;
+        this.employeeId = builder.employeeId;
+        this.scheduleDate = builder.scheduleDate;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+    }
 
     public String getScheduleId() {
         return scheduleId;
@@ -32,15 +38,15 @@ protected Schedule(){}
         return employeeId;
     }
 
-    public Date getScheduleDate() {
+    public LocalDate getScheduleDate() {
         return scheduleDate;
     }
 
-    public Time getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public Time getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
@@ -49,7 +55,11 @@ protected Schedule(){}
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Schedule schedule = (Schedule) o;
-        return Objects.equals(scheduleId, schedule.scheduleId) && Objects.equals(employeeId, schedule.employeeId) && Objects.equals(scheduleDate, schedule.scheduleDate) && Objects.equals(startTime, schedule.startTime) && Objects.equals(endTime, schedule.endTime);
+        return Objects.equals(scheduleId, schedule.scheduleId) &&
+                Objects.equals(employeeId, schedule.employeeId) &&
+                Objects.equals(scheduleDate, schedule.scheduleDate) &&
+                Objects.equals(startTime, schedule.startTime) &&
+                Objects.equals(endTime, schedule.endTime);
     }
 
     @Override
@@ -67,48 +77,50 @@ protected Schedule(){}
                 ", endTime=" + endTime +
                 '}';
     }
-    public static class Builder{
+
+    public static class Builder {
         private String scheduleId;
         private String employeeId;
-        private Date scheduleDate;
+        private LocalDate scheduleDate;
         private LocalTime startTime;
         private LocalTime endTime;
 
-        public Builder setScheduleId(String scheduleId ) {
-            this.scheduleId= scheduleId;
+        public Builder setScheduleId(String scheduleId) {
+            this.scheduleId = scheduleId;
             return this;
         }
 
         public Builder setEmployeeId(String employeeId) {
-            this.employeeId= employeeId;
+            this.employeeId = employeeId;
             return this;
         }
 
-        public Builder setScheduleDate(Date scheduleDate) {
-            this.scheduleDate= scheduleDate;
+        public Builder setScheduleDate(LocalDate scheduleDate) {
+            this.scheduleDate = scheduleDate;
             return this;
         }
 
-        public Builder setStartTime(Time startTime) {
-            this.startTime = startTime.toLocalTime();
+        public Builder setStartTime(LocalTime startTime) {
+            this.startTime = startTime;
             return this;
         }
 
-        public Builder setEndTime(Time endTime) {
-            this.endTime = endTime.toLocalTime();
+        public Builder setEndTime(LocalTime endTime) {
+            this.endTime = endTime;
             return this;
         }
 
-        public Builder copy(Schedule schedule){
-            this.employeeId = schedule.employeeId;
+        public Builder copy(Schedule schedule) {
             this.scheduleId = schedule.scheduleId;
+            this.employeeId = schedule.employeeId;
             this.scheduleDate = schedule.scheduleDate;
-            this.startTime = schedule.startTime.toLocalTime();
-            this.endTime = schedule.endTime.toLocalTime();
+            this.startTime = schedule.startTime;
+            this.endTime = schedule.endTime;
             return this;
         }
-        public Schedule build(){
-            return new Schedule();
+
+        public Schedule build() {
+            return new Schedule(this);
         }
     }
 }

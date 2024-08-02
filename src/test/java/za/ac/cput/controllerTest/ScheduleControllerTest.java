@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.Schedule;
 import za.ac.cput.factory.ScheduleFactory;
 
-import java.sql.Date;
 import java.sql.Time;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -21,12 +21,14 @@ class ScheduleControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
     private final String BASE_URL = "http://localhost:8080/ITGlowDesktop/schedule";
+
     private static Schedule schedule;
 
     @BeforeAll
-    public static void setup() {
-        schedule = ScheduleFactory.buildSchedule("12345", "54321", Date.valueOf("2024-05-26"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"));
+    public static void setUp() {
+        schedule = ScheduleFactory.buildSchedule("77210", "EMP001", LocalDate.of(2024, 7, 7), LocalTime.of(9, 0), LocalTime.of(17, 0));
     }
 
     @Test
@@ -53,7 +55,9 @@ class ScheduleControllerTest {
     @Test
     void c_update() {
         String URL = BASE_URL + "/update";
-        Schedule newSchedule = new Schedule.Builder().copy(schedule).setStartTime(Time.valueOf("08:00:00")).build();
+        Schedule newSchedule = new Schedule.Builder().copy(schedule)
+                .setStartTime(LocalTime.of(8, 0))
+                .build();
         ResponseEntity<Schedule> postResponse = restTemplate.postForEntity(URL, newSchedule, Schedule.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
@@ -68,12 +72,12 @@ class ScheduleControllerTest {
         String URL = BASE_URL + "/delete/" + schedule.getScheduleId();
         System.out.println("URL: " + URL);
         restTemplate.delete(URL);
-        System.out.println("Success: Deleted schedule");
+        System.out.println("Success: Deleted Schedule");
     }
 
     @Test
     void e_getAll() {
-        String URL = BASE_URL + "/getall";
+        String URL = BASE_URL + "/getAll";
         ResponseEntity<String> response = restTemplate.getForEntity(URL, String.class);
         System.out.println("Show All: ");
         System.out.println(response);

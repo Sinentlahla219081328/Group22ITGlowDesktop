@@ -9,6 +9,7 @@ import za.ac.cput.domain.Schedule;
 import za.ac.cput.service.ScheduleService;
 
 import java.util.List;
+
 /*OkuhleVellem*/
 @RestController
 @RequestMapping("/schedule")
@@ -22,9 +23,9 @@ public class ScheduleController {
         return scheduleService.create(schedule);
     }
 
-    @GetMapping("/read/{scheduleId}")
-    public Schedule read(@PathVariable String scheduleId){
-        return scheduleService.read(scheduleId);
+    @GetMapping("/read/{scheduleid}")
+    public Schedule read(@PathVariable String scheduleid){
+        return scheduleService.read(scheduleid);
     }
     @PostMapping("/update")
     public Schedule update(@RequestBody Schedule schedule){
