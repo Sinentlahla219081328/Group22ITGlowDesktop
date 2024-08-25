@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import NavLinks from '@/app/uicomponents/dashboard/navigation_links';
-import Logo from '@/app/uicomponents/dashboard/logo';
+import NavLinks from '@/uicomponents/dashboard/navigation_links';
+import Logo from '@/uicomponents/dashboard/logo';
 
 export default function sidenavigation() {
   return (
