@@ -44,6 +44,10 @@ const AppointmentPage: React.FC = () => {
   };
 
   return (
+
+    <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
+    <div className="flex h-20 shrink-0 items-end rounded-lg bg-pink-500 p-4 md:h-52">  
+   </div>
     <div className="container mx-auto py-8">
       <h1 className="text-2xl font-bold mb-4">Appointments</h1>
       <table className="min-w-full bg-white border">
@@ -90,6 +94,7 @@ const AppointmentPage: React.FC = () => {
         Create Appointment
       </button>
     </div>
+    </main>
   );
 };
 

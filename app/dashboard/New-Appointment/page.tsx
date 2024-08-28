@@ -24,6 +24,10 @@ const NewAppointment = () => {
   };
 
   return (
+    <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
+      <div className="flex h-20 shrink-0 items-end rounded-lg bg-pink-500 p-4 md:h-52">
+       <h1> Create New Appointment</h1>
+</div>
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Create New Appointment</h1>
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg">
@@ -83,6 +87,8 @@ const NewAppointment = () => {
         </div>
       </form>
     </div>
+     </main>
+
   );
 };
 
