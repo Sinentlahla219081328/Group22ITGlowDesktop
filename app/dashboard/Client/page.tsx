@@ -25,7 +25,7 @@ export default function Page() {
       </div>
       <div className='flex items-center justify-start rounded-lg ml-20 mt-20 bg-pink-100 w-1/2'>
         <form className='w-full'>
-
+        <div className="grid grid-cols-2 gap-6 mb-6">
           <label className="mb-3 mt-5 block text-3xl font-large text-gray-900" htmlFor="id">
             Firstname
           </label>
@@ -112,6 +112,7 @@ export default function Page() {
               <input type="radio" name="option" className="peer mr-2 rounded border-gray-200 text-3xl outline-4" />
               SMS
             </label>
+          </div>
           </div>
         </form> 
       </div>
