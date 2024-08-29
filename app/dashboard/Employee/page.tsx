@@ -1,6 +1,36 @@
+'use client';
 import React from 'react';
+import { useEffect, useState } from 'react';
+
+
 
 export default function EmployeeForm (){
+ const [employee, setEmployee] =useState('')
+ useEffect(()=>{
+  fetch('http://localhost:8080/employee/update')
+  .then((response)=> response.text())
+  .then((employee) =>{
+    setEmployee(employee);
+  });
+ }, []);
+
+ //we create new employee
+ const postEmployee =async() =>{
+
+  const response = await fetch ('http://localhost:8080/employee/create', {
+    method: 'Post',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({message: 'Hello from Next.js'}),
+
+  });
+  const result = await response.text();
+    console.log(result);
+  };
+
+ 
+
   return (
     <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
        <div className="flex h-20 shrink-0 items-end rounded-lg bg-pink-500 p-4 md:h-52">
@@ -60,7 +90,7 @@ export default function EmployeeForm (){
           </div>
         </div>
         <div className="flex space-x-4 ml-[900px] mt-[50px]">
-          <button type="submit" className="bg-purple-600 text-white py-3 px-6 rounded-lg">
+          <button onClick = {postEmployee} >
             Save
           </button>
           <button type="button" className="bg-purple-600 text-white py-3 px-6 rounded-lg">
@@ -74,6 +104,6 @@ export default function EmployeeForm (){
     </div>
     </main>
   );
-};
 
+}
 
