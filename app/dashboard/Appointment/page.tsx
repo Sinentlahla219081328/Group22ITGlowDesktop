@@ -71,7 +71,7 @@ const AppointmentPage: React.FC = () => {
               <td className="py-2 border">{appointment.time}</td>
               <td className="py-2 border">
                 <button
-                  onClick={() => router.push(`/dashboard/Appointment/update/${appointment.appointmentID}`)}
+                  onClick={() => router.push(`/dashboard/Update-App/${appointment.appointmentID}`)}
                   className="bg-blue-500 text-white py-1 px-2 rounded mr-2"
                 >
                   Update
