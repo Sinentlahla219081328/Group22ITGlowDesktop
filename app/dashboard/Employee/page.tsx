@@ -1,35 +1,51 @@
 'use client';
 import React from 'react';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 
 
 export default function EmployeeForm (){
- const [employee, setEmployee] =useState('')
- useEffect(()=>{
-  fetch('http://localhost:8080/employee/update')
-  .then((response)=> response.text())
-  .then((employee) =>{
-    setEmployee(employee);
-  });
- }, []);
+  const [employeeID, setEmployeeID] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [jobPosition, setJobPosition] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword]= useState('');
+  const [email,  setEmail] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [workTelephone, setWorkTelephone] = useState('');
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
 
- //we create new employee
- const postEmployee =async() =>{
+      const employee = { employeeID, firstName, lastName,jobPosition, userName, email, mobileNumber,workTelephone,password}
 
-  const response = await fetch ('http://localhost:8080/employee/create', {
-    method: 'Post',
-    headers:{
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({message: 'Hello from Next.js'}),
+      const response = await fetch("http://localhost:8081/ITGlowDesktop/employee/create", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(employee),
+      });
 
-  });
-  const result = await response.text();
-    console.log(result);
+      if (response.ok) {
+          // Handle successful response
+          console.log('Employee created successfully');
+      } else {
+          // Handle error response
+          console.error('Failed to create employee');
+      }
   };
 
- 
+  const updateUser = async (id: number, userData: { name: string; email: string; }) => {
+    try {
+        const response = await axios.put(`http://localhost:8081/ITGlowDesktop/employee/${id}`, userData);
+        console.log('User updated successfully:', response.data);
+    } catch (error) {
+        console.error('Error updating user:', error);
+    }
+};
 
   return (
     <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
@@ -38,12 +54,15 @@ export default function EmployeeForm (){
        </div>
     <div className="bg-white p-10 rounded-lg shadow-lg mt-10">
       <h2 className="text-2xl font-semibold mb-6">Add New Employee</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-6 mb-6">
+        
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-700">First Name</label>
             <input
               type="text"
+              value = {firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               placeholder="Enter First Name"
               className="w-full p-3 border rounded-md"
             />
@@ -52,7 +71,19 @@ export default function EmployeeForm (){
             <label className="block mb-2 text-sm font-medium text-gray-700">Last Name</label>
             <input
               type="text"
+              value = {lastName}
+              onChange={(e) => setLastName(e.target.value)}
               placeholder="Enter Last Name"
+              className="w-full p-3 border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">Employee Identification Number</label>
+            <input
+              type="text"
+              value = {employeeID}
+              onChange={(e) => setEmployeeID(e.target.value)}
+              placeholder="Employee Identification Number"
               className="w-full p-3 border rounded-md"
             />
           </div>
@@ -60,6 +91,8 @@ export default function EmployeeForm (){
             <label className="block mb-2 text-sm font-medium text-gray-700">Job Position</label>
             <input
               type="text"
+              value = {jobPosition}
+              onChange={(e) => setJobPosition(e.target.value)}
               placeholder="Enter Job Position"
               className="w-full p-3 border rounded-md"
             />
@@ -67,7 +100,9 @@ export default function EmployeeForm (){
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-700">Phone</label>
             <input
-              type="text"
+              type="number" 
+              value = {mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
               placeholder="Enter Phone Number"
               className="w-full p-3 border rounded-md"
             />
@@ -76,23 +111,47 @@ export default function EmployeeForm (){
             <label className="block mb-2 text-sm font-medium text-gray-700">Email Address</label>
             <input
               type="email"
-              placeholder="Enter Work Email Address"
+              value = {email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter Email Address"
               className="w-full p-3 border rounded-md"
             />
           </div>
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-700">Mobile Number</label>
+            <label className="block mb-2 text-sm font-medium text-gray-700">Work number</label>
+            <input
+              type="number"
+              value = {workTelephone}
+              onChange={(e) => setWorkTelephone(e.target.value)}
+              placeholder="Enter Work Number"
+              className="w-full p-3 border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">Username</label>
             <input
               type="text"
-              placeholder="Enter Mobile Number"
+              value = {userName}
+              onChange={(e) => setUserName(e.target.value)}
+              placeholder="Enter username"
+              className="w-full p-3 border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              value = {password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Password"
               className="w-full p-3 border rounded-md"
             />
           </div>
         </div>
         <div className="flex space-x-4 ml-[900px] mt-[50px]">
-          <button onClick = {postEmployee} >
-            Save
-          </button>
+        <button type="submit" className="bg-blue-600 text-white py-3 px-6 rounded-lg">
+        Save
+      </button>
           <button type="button" className="bg-purple-600 text-white py-3 px-6 rounded-lg">
             Save & Add Another
           </button>
@@ -104,6 +163,5 @@ export default function EmployeeForm (){
     </div>
     </main>
   );
-
 }
 

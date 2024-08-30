@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3003",
+    "dev": "next dev -p 3004",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@types/axios": "^0.14.0",
+=======
+>>>>>>> 5b76e7243e02e50b7eebf15d5a9ccc800d09fcc1
     "axios": "^1.7.5",
     "clsx": "^2.1.1",
     "next": "^14.2.5",
