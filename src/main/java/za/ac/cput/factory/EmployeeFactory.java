@@ -10,10 +10,11 @@ import za.ac.cput.util.Helper;
 
 public class EmployeeFactory {
     public static Employee buildEmployee(String employeeID, String firstName, String lastName, String userName
-                                         ,String jobPosition,String password, String email, String mobileNumber, String workTelephone) {
+                                         , String jobPosition, String password, String email, String mobileNumber, String workTelephone, String success, String message) {
         if (Helper.isNullOrEmpty(employeeID) || Helper.isNullOrEmpty(firstName)
                 || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(userName)
-                || Helper.isNullOrEmpty(jobPosition) || Helper.isNullOrEmpty(password)) {
+                || Helper.isNullOrEmpty(jobPosition) || Helper.isNullOrEmpty(password)
+                || Helper.isNullOrEmpty(success)  || Helper.isNullOrEmpty(message)  ) {
             return null;
         }
 
@@ -29,6 +30,8 @@ public class EmployeeFactory {
                 .setUserName(userName)
                 .setJobPosition(jobPosition)
                 .setPassword(password)
+                .setMessage(message)
+                .setSuccess(Boolean.parseBoolean(success))
                 .setContact(contact)
                 .build();
     }
