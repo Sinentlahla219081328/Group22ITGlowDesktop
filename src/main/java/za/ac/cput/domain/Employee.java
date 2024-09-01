@@ -15,6 +15,8 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String userName;
+    private String jobPosition;
+    private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email")
@@ -30,6 +32,8 @@ public class Employee {
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.userName = builder.userName;
+        this.jobPosition = builder.jobPosition;
+        this.password = builder.password;
         contact = builder.contact;
 
     }
@@ -50,6 +54,10 @@ public class Employee {
         return userName;
     }
 
+    public String getJobPosition() {return jobPosition;}
+
+    public String getPassword() {return password;}
+
     public Contact getContact() {
         return contact;
     }
@@ -59,12 +67,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(employeeID, employee.employeeID) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(contact, employee.contact);
+        return Objects.equals(employeeID, employee.employeeID) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(password, employee.password) && Objects.equals(contact, employee.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeID, firstName, lastName, userName, contact);
+        return Objects.hash(employeeID, firstName, lastName, userName, jobPosition, password, contact);
     }
 
     @Override
@@ -74,6 +82,8 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
+                ", jobPosition='" + jobPosition + '\'' +
+                ", password='" + password + '\'' +
                 ", contact=" + contact +
                 '}';
     }
@@ -83,6 +93,8 @@ public class Employee {
         private String firstName;
         private String lastName;
         private String userName;
+        private String jobPosition;
+        private String password;
         private Contact contact;
 
         public Builder setEmployeeID(String employeeID) {
@@ -105,6 +117,16 @@ public class Employee {
             return this;
         }
 
+        public Builder setJobPosition(String jobPosition) {
+            this.jobPosition = jobPosition;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
         public Builder setContact(Contact contact) {
             this.contact = contact;
             return this;
@@ -115,6 +137,8 @@ public class Employee {
             this.firstName = employee.firstName;
             this.lastName = employee.lastName;
             this.userName = employee.userName;
+            this.jobPosition = employee.jobPosition;
+            this.password = employee.password;
             this.contact = employee.contact;
             return this;
         }
