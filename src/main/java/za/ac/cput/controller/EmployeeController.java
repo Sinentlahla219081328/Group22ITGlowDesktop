@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
+@CrossOrigin("http://localhost/3004")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
