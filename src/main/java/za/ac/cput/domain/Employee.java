@@ -11,35 +11,29 @@ import java.util.Objects;
 @Entity
 public class Employee {
     @Id
-    private String employeeID;
+    private Long idNumber;
     private String firstName;
     private String lastName;
     private String userName;
     private String jobPosition;
+    private String email;
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "email")
-    private Contact contact;
-
-
     protected Employee() {
-
     }
 
     private Employee(Builder builder) {
-        this.employeeID= builder.employeeID;
+        this.idNumber = builder.idNumber;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.userName = builder.userName;
         this.jobPosition = builder.jobPosition;
+        this.email = builder.email;
         this.password = builder.password;
-        contact = builder.contact;
-
     }
 
-    public String getEmployeeID() {
-        return employeeID;
+    public Long getIdNumber() {
+        return idNumber;
     }
 
     public String getFirstName() {
@@ -54,12 +48,16 @@ public class Employee {
         return userName;
     }
 
-    public String getJobPosition() {return jobPosition;}
+    public String getJobPosition() {
+        return jobPosition;
+    }
 
-    public String getPassword() {return password;}
+    public String getEmail() {
+        return email;
+    }
 
-    public Contact getContact() {
-        return contact;
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -67,38 +65,38 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(employeeID, employee.employeeID) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(password, employee.password) && Objects.equals(contact, employee.contact);
+        return Objects.equals(idNumber, employee.idNumber) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(email, employee.email) && Objects.equals(password, employee.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeID, firstName, lastName, userName, jobPosition, password, contact);
+        return Objects.hash(idNumber, firstName, lastName, userName, jobPosition, email, password);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeID='" + employeeID + '\'' +
+                "idNumber='" + idNumber + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", jobPosition='" + jobPosition + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", contact=" + contact +
                 '}';
     }
 
     public static class Builder {
-        private String employeeID;
+        private Long idNumber;
         private String firstName;
         private String lastName;
         private String userName;
         private String jobPosition;
+        private String email;
         private String password;
-        private Contact contact;
 
-        public Builder setEmployeeID(String employeeID) {
-            this.employeeID = employeeID;
+        public Builder setIdNumber(Long idNumber) {
+            this.idNumber = idNumber;
             return this;
         }
 
@@ -122,26 +120,27 @@ public class Employee {
             return this;
         }
 
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
         public Builder setPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder setContact(Contact contact) {
-            this.contact = contact;
-            return this;
-        }
-
         public Builder copy(Employee employee) {
-            this.employeeID = employee.employeeID;
+            this.idNumber = employee.idNumber;
             this.firstName = employee.firstName;
             this.lastName = employee.lastName;
             this.userName = employee.userName;
             this.jobPosition = employee.jobPosition;
+            this.email = employee.email;
             this.password = employee.password;
-            this.contact = employee.contact;
             return this;
         }
+
         public Employee build() {
             return new Employee(this);
         }

@@ -15,12 +15,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
     @PostMapping("/create")
     public Employee create(@RequestBody Employee employee){return employeeService.create(employee);}
-    @GetMapping("/read/{employeeID}")
-    public Employee read(@PathVariable String employeeID){return employeeService.read(employeeID);}
+    @GetMapping("/read/{idNumber}")
+    public Employee read(@PathVariable Long idNumber){return employeeService.read(idNumber);}
     @PostMapping("/update")
     public Employee update (@RequestBody Employee employee){return employeeService.update(employee);}
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable String id){employeeService.delete(id);}
+    public void delete(@PathVariable Long id){employeeService.delete(id);}
     @GetMapping("/getall")
     public List<Employee> getall(){return employeeService.getall();}
 }
