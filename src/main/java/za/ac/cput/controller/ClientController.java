@@ -9,6 +9,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/client")
+@CrossOrigin("http://localhost/3004")
 public class ClientController {
     @Autowired
     private ClientService clientService;

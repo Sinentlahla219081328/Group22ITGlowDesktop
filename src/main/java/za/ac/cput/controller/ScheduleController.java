@@ -12,6 +12,7 @@ import java.util.List;
 
 /*OkuhleVellem*/
 @RestController
+@CrossOrigin(value = "http://localhost/3003")
 @RequestMapping("/schedule")
 
 public class ScheduleController {
