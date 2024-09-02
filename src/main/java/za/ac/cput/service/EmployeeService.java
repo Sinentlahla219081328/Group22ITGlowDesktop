@@ -23,15 +23,15 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public Employee create(Employee employee) {return repository.save(employee);}
     @Override
-    public Employee read(String employeeID) {
-        return this.repository.findById(employeeID).orElse(null);
+    public Employee read(Long idNumber) {
+        return repository.findById(idNumber).orElse(null);
     }
     @Override
     public Employee update(Employee employee) {
         return repository.save(employee);
     }
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
     @Override
