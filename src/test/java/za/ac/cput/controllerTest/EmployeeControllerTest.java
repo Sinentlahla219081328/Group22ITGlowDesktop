@@ -22,7 +22,7 @@ class EmployeeControllerTest {
 
     @BeforeAll
     public static void setup() {
-        employee = EmployeeFactory.buildEmployee("218130260", "joka", "zimkhita", "vsxyb", "aphelele@gmail.com", "0845368921", "0218420000");
+        employee = EmployeeFactory.buildEmployee("218130260", "joka", "zimkhita", "zimmy1", "hairstylist", "627xhq", "aphelele@gmail.com", "0845368921", "0213378102");
 
     }
         @Test

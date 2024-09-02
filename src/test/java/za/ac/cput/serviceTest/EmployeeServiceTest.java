@@ -22,11 +22,11 @@ class EmployeeServiceTest {
 
     @Test
     void a_setup(){
-        employee1 = EmployeeFactory.buildEmployee("218130260", "Kunge","Nceba","Nceba720101","kungenceba@gmail.com","0843348820","0216587772","Nail Tech","Ajoka1234");
+        employee1 = EmployeeFactory.buildEmployee("218130260", "joka", "zimkhita", "zimmy1", "hairstylist", "627xhq", "aphelele@gmail.com", "0845368921", "0213378102");
         assertNotNull(employee1);
         System.out.println(employee1);
 
-        employee2 = EmployeeFactory.buildEmployee("369258147", "Aphelele","Joka","Aphelele218130260","apelelejoka@gmail.com","0843340567","0216582311","Nail Tech","Ajoka1234");
+        employee2 = EmployeeFactory.buildEmployee("218902756", "likhona", "nxusani", "likhs25", "barber", "320pfs", "likhs25@gmail.com", "0613601884", "0217510088");
         assertNotNull(employee2);
         System.out.println(employee2);
     }
