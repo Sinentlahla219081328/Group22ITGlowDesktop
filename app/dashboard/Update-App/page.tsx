@@ -25,7 +25,7 @@ const UpdateAppointment: React.FC = () => {
     if (appointmentID) {
       const fetchAppointment = async () => {
         try {
-          const response = await axios.get(`/api/appointment/read/${appointmentID}`);
+          const response = await axios.get(`http://localhost:8080/ITGlowDesktop/appointment/read/${appointmentID}`);
           setAppointment(response.data);
           setFormData(response.data);
         } catch (error) {
@@ -46,7 +46,7 @@ const UpdateAppointment: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post(`/api/appointment/update`, formData);
+      await axios.post(`http://localhost:8080/ITGlowDesktop/appointment/update`, formData);
       router.push('/dashboard/Appointment');
     } catch (error) {
       console.error('Error updating appointment:', error);

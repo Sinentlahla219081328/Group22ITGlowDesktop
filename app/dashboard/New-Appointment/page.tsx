@@ -26,7 +26,7 @@ const NewAppointment = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get('/api/clients'); // Adjust the endpoint as needed
+        const response = await axios.get('http://localhost:8080/ITGlowDesktop/client'); // Adjust the endpoint as needed
         setClients(response.data);
       } catch (error) {
         console.error('Error fetching clients:', error);
@@ -35,7 +35,7 @@ const NewAppointment = () => {
 
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get('/api/employees'); // Adjust the endpoint as needed
+        const response = await axios.get('http://localhost:8080/ITGlowDesktop/employee'); // Adjust the endpoint as needed
         setEmployees(response.data);
       } catch (error) {
         console.error('Error fetching employees:', error);
@@ -49,7 +49,7 @@ const NewAppointment = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Implement the save logic and connect to your database here
-    axios.post('/api/appointments', { appointmentId, selectedClientId, selectedEmployeeId, date, time })
+    axios.post('http://localhost:8080/ITGlowDesktop/appointments', { appointmentId, selectedClientId, selectedEmployeeId, date, time })
     router.push('/dashboard/Appointment');
   };
 

@@ -34,7 +34,7 @@ export default function Payment() {
     setSuccess(false);
 
     try {
-      const response = await fetch('/api/payments', {
+      const response = await fetch('http://localhost:8080/ITGlowDesktop/payments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
