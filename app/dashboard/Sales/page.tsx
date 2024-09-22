@@ -34,7 +34,7 @@ export default function Sales() {
     setSuccess(false);
   
     try {
-      const response = await fetch('/api/sales', {
+      const response = await fetch('http://localhost:8080/ITGlowDesktop/sales', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -19,7 +19,7 @@ const AppointmentPage: React.FC = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get('/api/appointment/getAll');
+        const response = await axios.get('http://localhost:8081/ITGlowDesktop/appointment/getAll');
         setAppointments(response.data);
       } catch (error) {
         console.error('Error fetching appointments:', error);
@@ -31,7 +31,7 @@ const AppointmentPage: React.FC = () => {
   // Handle delete appointment
   const handleDelete = async (appointmentID: string) => {
     try {
-      await axios.delete(`/api/appointment/delete/${appointmentID}`);
+      await axios.delete(`http://localhost:8080/ITGlowDesktop/appointment/delete/${appointmentID}`);
       setAppointments(appointments.filter(appointment => appointment.appointmentID !== appointmentID));
     } catch (error) {
       console.error('Error deleting appointment:', error);

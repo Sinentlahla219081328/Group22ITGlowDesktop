@@ -21,7 +21,7 @@ const NewSchedule: React.FC = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get('/api/employees'); // Adjust the endpoint as needed
+        const response = await axios.get('http://localhost:8080/ITGlowDesktop/employees'); // Adjust the endpoint as needed
         setEmployees(response.data);
       } catch (error) {
         console.error('Error fetching employees:', error);

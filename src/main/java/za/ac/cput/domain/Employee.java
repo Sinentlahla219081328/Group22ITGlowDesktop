@@ -11,29 +11,44 @@ import java.util.Objects;
 @Entity
 public class Employee {
     @Id
-    private Long idNumber;
+    private String employeeID;
     private String firstName;
     private String lastName;
     private String userName;
     private String jobPosition;
-    private String email;
     private String password;
+    private boolean success;
+    private String message;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "email")
+    private Contact contact;
+
 
     protected Employee() {
+
     }
 
     private Employee(Builder builder) {
-        this.idNumber = builder.idNumber;
+        this.employeeID= builder.employeeID;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.userName = builder.userName;
         this.jobPosition = builder.jobPosition;
-        this.email = builder.email;
         this.password = builder.password;
+        this.success = builder.success;
+        this.message = builder.message;
+        contact = builder.contact;
+
     }
 
-    public Long getIdNumber() {
-        return idNumber;
+    public Employee (boolean success, String message) {
+        this.success = success;
+        this.message = message;
+    }
+
+    public String getEmployeeID() {
+        return employeeID;
     }
 
     public String getFirstName() {
@@ -48,16 +63,16 @@ public class Employee {
         return userName;
     }
 
-    public String getJobPosition() {
-        return jobPosition;
-    }
+    public String getJobPosition() {return jobPosition;}
 
-    public String getEmail() {
-        return email;
-    }
+    public String getPassword() {return password;}
 
-    public String getPassword() {
-        return password;
+    public boolean isSuccess() {return success;}
+
+    public String getMessage() {return message;}
+
+    public Contact getContact() {
+        return contact;
     }
 
     @Override
@@ -65,38 +80,42 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(idNumber, employee.idNumber) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(email, employee.email) && Objects.equals(password, employee.password);
+        return success == employee.success && Objects.equals(employeeID, employee.employeeID) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(password, employee.password) && Objects.equals(message, employee.message) && Objects.equals(contact, employee.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idNumber, firstName, lastName, userName, jobPosition, email, password);
+        return Objects.hash(employeeID, firstName, lastName, userName, jobPosition, password, success, message, contact);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "idNumber='" + idNumber + '\'' +
+                "employeeID='" + employeeID + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", jobPosition='" + jobPosition + '\'' +
-                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", success=" + success +
+                ", message='" + message + '\'' +
+                ", contact=" + contact +
                 '}';
     }
 
     public static class Builder {
-        private Long idNumber;
+        private String employeeID;
         private String firstName;
         private String lastName;
         private String userName;
         private String jobPosition;
-        private String email;
         private String password;
+        private boolean success;
+        private String message;
+        private Contact contact;
 
-        public Builder setIdNumber(Long idNumber) {
-            this.idNumber = idNumber;
+        public Builder setEmployeeID(String employeeID) {
+            this.employeeID = employeeID;
             return this;
         }
 
@@ -120,27 +139,36 @@ public class Employee {
             return this;
         }
 
-        public Builder setEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
         public Builder setPassword(String password) {
             this.password = password;
             return this;
         }
 
+        public Builder setSuccess(boolean success) {
+            this.success = success;
+            return this;
+        }
+
+        public Builder setMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public Builder setContact(Contact contact) {
+            this.contact = contact;
+            return this;
+        }
+
         public Builder copy(Employee employee) {
-            this.idNumber = employee.idNumber;
+            this.employeeID = employee.employeeID;
             this.firstName = employee.firstName;
             this.lastName = employee.lastName;
             this.userName = employee.userName;
             this.jobPosition = employee.jobPosition;
-            this.email = employee.email;
             this.password = employee.password;
+            this.contact = employee.contact;
             return this;
         }
-
         public Employee build() {
             return new Employee(this);
         }
