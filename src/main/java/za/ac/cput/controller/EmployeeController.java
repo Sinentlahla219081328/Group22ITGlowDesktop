@@ -8,8 +8,9 @@ import za.ac.cput.service.EmployeeService;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3004")
 @RequestMapping("/employee")
-@CrossOrigin("http://localhost/3004")
+
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
