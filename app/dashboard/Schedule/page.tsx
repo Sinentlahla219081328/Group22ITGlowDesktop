@@ -19,7 +19,7 @@ const SchedulePage: React.FC = () => {
   useEffect(() => {
     const fetchSchedules = async () => {
       try {
-        const response = await axios.get('/api/schedule/getall');
+        const response = await axios.get('http://localhost:8080/ITGlowDesktop/schedule/getall');
         setSchedules(response.data);
       } catch (error) {
         console.error('Error fetching schedules:', error);
@@ -31,7 +31,7 @@ const SchedulePage: React.FC = () => {
   // Handle delete schedule
   const handleDelete = async (scheduleId: string) => {
     try {
-      await axios.delete(`/api/schedule/delete/${scheduleId}`);
+      await axios.delete(`http://localhost:8080/ITGlowDesktop/schedule/delete/${scheduleId}`);
       setSchedules(schedules.filter(schedule => schedule.scheduleId !== scheduleId));
     } catch (error) {
       console.error('Error deleting schedule:', error);

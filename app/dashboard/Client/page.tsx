@@ -15,7 +15,7 @@ export default function Page() {
 
       const client = { clientId, firstName, lastName, email, mobileNumber}
 
-      const response = await fetch('http://localhost:8081/ITGlowDesktop/client/create',
+      const response = await fetch('http://localhost:8080/ITGlowDesktop/client/create',
       
           {
           method: 'POST',

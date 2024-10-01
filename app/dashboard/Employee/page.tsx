@@ -21,7 +21,7 @@ export default function EmployeeForm (){
 
       const employee = { employeeID, firstName, lastName,jobPosition, userName, email, mobileNumber,workTelephone,password}
 
-      const response = await fetch("http://localhost:8081/ITGlowDesktop/employee/create", {
+      const response = await fetch("http://localhost:8080/ITGlowDesktop/employee/create", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export default function EmployeeForm (){
 
   const updateUser = async (id: number, userData: { name: string; email: string; }) => {
     try {
-        const response = await axios.put(`http://localhost:8081/ITGlowDesktop/employee/${id}`, userData);
+        const response = await axios.put(`http://localhost:8080/ITGlowDesktop/employee/update/${id}`, userData);
         console.log('User updated successfully:', response.data);
     } catch (error) {
         console.error('Error updating user:', error);
@@ -50,7 +50,12 @@ export default function EmployeeForm (){
   return (
     <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
        <div className="flex h-20 shrink-0 items-end rounded-lg bg-pink-500 p-4 md:h-52">
-
+       <button
+                   /* onClick={() => push(`app/dashboard/Employee/allEmployee.tsx/${employeeID}`)}
+                    className="bg-blue-500 text-white py-1 px-2 rounded mr-2"*/
+                  >
+                    Get All
+                  </button>
        </div>
     <div className="bg-white p-10 rounded-lg shadow-lg mt-10">
       <h2 className="text-2xl font-semibold mb-6">Add New Employee</h2>
