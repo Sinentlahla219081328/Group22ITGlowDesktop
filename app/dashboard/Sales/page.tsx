@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 
@@ -34,8 +34,9 @@ export default function Sales() {
     setSuccess(false);
 
     try {
-      // API call to create sale
-      const response = await fetch('http://localhost:8080/api/sales/create', {
+
+      const response = await fetch('http://localhost:8080/ITGlowDesktop/sales', {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

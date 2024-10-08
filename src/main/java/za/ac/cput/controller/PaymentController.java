@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payment")
+@CrossOrigin("http://localhost/3004")
 public class PaymentController {
     private final PaymentService paymentService;
 

@@ -12,6 +12,7 @@ import za.ac.cput.service.AppointmentService;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost/3004")
 @RequestMapping("/appointment")
 public class AppointmentController {
     @Autowired
