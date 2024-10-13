@@ -1,105 +1,183 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
-import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { useRouter, useParams } from 'next/navigation';
+
+interface Client {
+  id: string;
+}
+
+interface Employee {
+  id: string;
+}
 
 interface Appointment {
-  appointmentID: string;
+  appointmentID?: string;
   clientId: string;
   employeeID: string;
   date: string;
   time: string;
 }
 
-const AppointmentPage: React.FC = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
+const AppointmentForm: React.FC = () => {
   const router = useRouter();
+  const params = useParams();
+  const { appointmentID } = params; // Extracting appointmentID from params
 
-  // Fetch appointments from the API
+  const [clients, setClients] = useState<Client[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [formData, setFormData] = useState<Appointment>({
+    clientId: '',
+    employeeID: '',
+    date: '',
+    time: '',
+  });
+  const [error, setError] = useState<string | null>(null);
+  const isUpdate = Boolean(appointmentID); // Check if updating or creating
+
+  // Fetch clients and employees from the API
   useEffect(() => {
-    const fetchAppointments = async () => {
+    const fetchClients = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/ITGlowDesktop/appointment/getAll');
-        setAppointments(response.data);
+        const response = await axios.get('http://localhost:8080/ITGlowDesktop/client');
+        setClients(response.data);
       } catch (error) {
-        console.error('Error fetching appointments:', error);
+        console.error('Error fetching clients:', error);
       }
     };
-    fetchAppointments();
-  }, []);
 
-  // Handle delete appointment
-  const handleDelete = async (appointmentID: string) => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/ITGlowDesktop/employee');
+        setEmployees(response.data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
+
+    fetchClients();
+    fetchEmployees();
+    
+    // If updating, fetch the appointment details
+    if (isUpdate) {
+      const fetchAppointment = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/ITGlowDesktop/appointment/read/${appointmentID}`);
+          setFormData(response.data);
+        } catch (error) {
+          console.error('Error fetching appointment:', error);
+          setError('Failed to load appointment details.');
+        }
+      };
+      fetchAppointment();
+    }
+  }, [appointmentID]);
+
+  // Handle form input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null); // Clear previous error
+
+    if (!formData.clientId || !formData.employeeID || !formData.date || !formData.time) {
+      setError('All fields are required.');
+      return;
+    }
+
     try {
-      await axios.delete(`http://localhost:8080/ITGlowDesktop/appointment/delete/${appointmentID}`);
-      setAppointments(appointments.filter(appointment => appointment.appointmentID !== appointmentID));
+      if (isUpdate) {
+        await axios.post(`http://localhost:8080/ITGlowDesktop/appointment/update`, { ...formData, appointmentID });
+      } else {
+        await axios.post(`http://localhost:8080/ITGlowDesktop/appointments`, formData);
+      }
+      router.push('/dashboard/Appointment');
     } catch (error) {
-      console.error('Error deleting appointment:', error);
+      console.error('Error saving appointment:', error);
+      setError('Failed to save appointment. Please try again.');
     }
   };
 
-  // Redirect to the create appointment form
-  const handleCreate = () => {
-    router.push('/dashboard/New-Appointment');
-  };
-
   return (
-
-    <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
-    <div className="flex h-20 shrink-0 items-end rounded-lg bg-pink-500 p-4 md:h-52">  
-   </div>
     <div className="container mx-auto py-8">
-      <h1 className="text-2xl font-bold mb-4">Appointments</h1>
-      <table className="min-w-full bg-white border">
-        <thead>
-          <tr>
-            <th className="py-2 border">Appointment ID</th>
-            <th className="py-2 border">Client ID</th>
-            <th className="py-2 border">Employee ID</th>
-            <th className="py-2 border">Date</th>
-            <th className="py-2 border">Time</th>
-            <th className="py-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments.map(appointment => (
-            <tr key={appointment.appointmentID}>
-              <td className="py-2 border">{appointment.appointmentID}</td>
-              <td className="py-2 border">{appointment.clientId}</td>
-              <td className="py-2 border">{appointment.employeeID}</td>
-              <td className="py-2 border">{appointment.date}</td>
-              <td className="py-2 border">{appointment.time}</td>
-              <td className="py-2 border">
-                <button
-                  onClick={() => router.push(`/dashboard/Update-App/${appointment.appointmentID}`)}
-                  className="bg-blue-500 text-white py-1 px-2 rounded mr-2"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDelete(appointment.appointmentID)}
-                  className="bg-red-500 text-white py-1 px-2 rounded"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button
-        onClick={handleCreate}
-        className="bg-green-500 text-white py-2 px-4 rounded mt-4"
-      >
-        Create Appointment
-      </button>
+      <h1 className="text-2xl font-bold mb-4">{isUpdate ? 'Update' : 'Create New'} Appointment</h1>
+      {error && <div className="text-red-500 mb-4">{error}</div>} {/* Error message */}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Client ID</label>
+          <select
+            name="clientId"
+            value={formData.clientId}
+            onChange={handleChange}
+            className="mt-1 p-2 border w-full"
+            required
+          >
+            <option value="" disabled>Select a client</option>
+            {clients.map(client => (
+              <option key={client.id} value={client.id}>{client.id}</option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Employee ID</label>
+          <select
+            name="employeeID"
+            value={formData.employeeID}
+            onChange={handleChange}
+            className="mt-1 p-2 border w-full"
+            required
+          >
+            <option value="" disabled>Select an employee</option>
+            {employees.map(employee => (
+              <option key={employee.id} value={employee.id}>{employee.id}</option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Date</label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className="mt-1 p-2 border w-full"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Time</label>
+          <input
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            className="mt-1 p-2 border w-full"
+            required
+          />
+        </div>
+        <div className="flex justify-between">
+          <button
+            type="button"
+            onClick={() => router.push('/dashboard/Appointment')}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Save
+          </button>
+        </div>
+      </form>
     </div>
-    </main>
   );
 };
 
-export default AppointmentPage;
-
-
-
-
+export default AppointmentForm;
