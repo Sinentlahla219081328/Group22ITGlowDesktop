@@ -1,28 +1,54 @@
 'use client';
 import React, { useState } from 'react';
-import {login} from '../login/authlogin'
+import axios from 'axios';
 
-export default function LoginModal(){
+interface Employee {
+  username: string;
+  password: string;
+  success?: boolean;  
+  message?: string;  
+}
 
+const login = async (username: string, password: string): Promise<Employee> => {
+  try {
+    const response = await axios.post<Employee>('http://localhost:8081/ITGlowDesktop/employee', {
+      username,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response.data;
+    }
+    return {
+      username,
+      password,
+      success: false,
+      message: 'An error occurred during login',
+    };
+  }
+};
+
+export default function LoginModal() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  const handleSubmit = async(event :React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const response = await login(userName, password);
 
-    const response = await login (userName, password);
     if (response.success) {
       alert('Login successful!');
       closeModal();
-      
     } else {
       setErrorMessage(response.message || 'Login failed');
     }
   };
-
 
   return (
     <div>
@@ -32,8 +58,8 @@ export default function LoginModal(){
       >
         Login
       </button>
-    
-      {open() && (
+
+      {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded shadow-lg w-96">
             <h2 className="text-2xl font-bold mb-4">Login</h2>
@@ -45,7 +71,7 @@ export default function LoginModal(){
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                  Email
+                  Email (Username)
                 </label>
                 <input
                   type="text"
@@ -87,7 +113,3 @@ export default function LoginModal(){
     </div>
   );
 }
-function setIsOpen(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
-
