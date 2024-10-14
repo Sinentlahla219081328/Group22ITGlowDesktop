@@ -22,8 +22,8 @@ class EmployeeControllerTest {
 
     @BeforeAll
     public static void setup() {
-
-        employee = EmployeeFactory.buildEmployee(218130260L, "joka", "zimkhita", "zimmy1", "hairstylist", "627xhq", "aphelele@gmail.com", "0712345678", "0211234567", "true", "Employee created successfully");
+        employee = EmployeeFactory.buildEmployee(
+                218130260, "joka", "zimkhita", "hairstylist", "679xhq", "aphelele@gmail.com",  "0771203510", "0219802222", "true", "Welcome to ITGlow");
     }
 
     @Test
@@ -59,7 +59,7 @@ class EmployeeControllerTest {
         assertNotNull(postResponse.getBody());
         Employee employeeUpdated = postResponse.getBody();
         System.out.println("Updated Employee: " + employeeUpdated);
-        assertEquals(newEmployee.getEmployeeID(), employeeUpdated.getEmployeeID());
+        assertEquals(newEmployee.getEmployeeID(), employeeUpdated.getEmployeeID());  // Changed to getIdNumber
     }
 
     @Disabled
@@ -80,3 +80,4 @@ class EmployeeControllerTest {
         System.out.println(response.getBody());
     }
 }
+

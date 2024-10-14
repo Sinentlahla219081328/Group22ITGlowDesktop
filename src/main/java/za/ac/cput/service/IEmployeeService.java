@@ -4,8 +4,9 @@ import za.ac.cput.domain.Employee;
 
 import java.util.List;
 
-public interface IEmployeeService extends  IService <Employee, Long>{
+public interface IEmployeeService extends  IService <Employee, Integer>{
 
-    List<Employee> getall();
+    List<Employee> getAll();
 
 }
+

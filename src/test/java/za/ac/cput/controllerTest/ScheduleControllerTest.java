@@ -22,7 +22,7 @@ class ScheduleControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final String BASE_URL = "http://localhost:8080/ITGlowDesktop/schedule";
+    private final String BASE_URL = "http://localhost:8080/ITGlow/schedule";
 
     private static Schedule schedule;
 

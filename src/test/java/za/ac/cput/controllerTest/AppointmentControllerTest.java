@@ -15,7 +15,6 @@ import za.ac.cput.domain.Appointment;
 import za.ac.cput.factory.AppointmentFactory;
 
 
-
 import java.sql.Time;
 import java.util.Date;
 
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppointmentControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
-    private final String baseURL = "http://localhost:8080/ITGlowDesktop/appointment";
+    private final String baseURL = "http://localhost:8080/ITGlow/appointment";
     private static Appointment appointment;
 
     @BeforeAll

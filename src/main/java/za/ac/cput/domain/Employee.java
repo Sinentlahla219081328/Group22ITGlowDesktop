@@ -1,21 +1,21 @@
+
 package za.ac.cput.domain;
 
 /*
  Aphelele Zimkhita Joka 218130260
-
  */
 
 import jakarta.persistence.*;
 
 import java.util.Objects;
+
 @Entity
 public class Employee {
     @Id
-    private String employeeID;
+    private int employeeID; // Changed to int
     private String firstName;
     private String lastName;
-    private String userName;
-    private String jobPosition;
+    private String jobPosition; // Removed userName
     private String password;
     private boolean success;
     private String message;
@@ -24,30 +24,26 @@ public class Employee {
     @JoinColumn(name = "email")
     private Contact contact;
 
-
     protected Employee() {
-
     }
 
     private Employee(Builder builder) {
-        this.employeeID= builder.employeeID;
+        this.employeeID = builder.employeeID; // Changed from String to int
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
-        this.userName = builder.userName;
-        this.jobPosition = builder.jobPosition;
+        this.jobPosition = builder.jobPosition; // Updated to reflect removal
         this.password = builder.password;
         this.success = builder.success;
         this.message = builder.message;
         contact = builder.contact;
-
     }
 
-    public Employee (boolean success, String message) {
+    public Employee(boolean success, String message) {
         this.success = success;
         this.message = message;
     }
 
-    public String getEmployeeID() {
+    public int getEmployeeID() { // Changed return type from String to int
         return employeeID;
     }
 
@@ -59,17 +55,21 @@ public class Employee {
         return lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getJobPosition() { // Updated to reflect removal of userName
+        return jobPosition;
     }
 
-    public String getJobPosition() {return jobPosition;}
+    public String getPassword() {
+        return password;
+    }
 
-    public String getPassword() {return password;}
+    public boolean isSuccess() {
+        return success;
+    }
 
-    public boolean isSuccess() {return success;}
-
-    public String getMessage() {return message;}
+    public String getMessage() {
+        return message;
+    }
 
     public Contact getContact() {
         return contact;
@@ -80,22 +80,28 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return success == employee.success && Objects.equals(employeeID, employee.employeeID) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(password, employee.password) && Objects.equals(message, employee.message) && Objects.equals(contact, employee.contact);
+        return success == employee.success &&
+                employeeID == employee.employeeID && // Updated comparison
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(jobPosition, employee.jobPosition) && // Updated to reflect removal of userName
+                Objects.equals(password, employee.password) &&
+                Objects.equals(message, employee.message) &&
+                Objects.equals(contact, employee.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeID, firstName, lastName, userName, jobPosition, password, success, message, contact);
+        return Objects.hash(employeeID, firstName, lastName, jobPosition, password, success, message, contact); // Updated to reflect removal of userName
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeID='" + employeeID + '\'' +
+                "employeeID=" + employeeID + // Updated to reflect int
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", jobPosition='" + jobPosition + '\'' +
+                ", jobPosition='" + jobPosition + '\'' + // Updated to reflect removal of userName
                 ", password='" + password + '\'' +
                 ", success=" + success +
                 ", message='" + message + '\'' +
@@ -104,18 +110,17 @@ public class Employee {
     }
 
     public static class Builder {
-        private String employeeID;
+        private int employeeID; // Changed from String to int
         private String firstName;
         private String lastName;
-        private String userName;
-        private String jobPosition;
+        private String jobPosition; // Removed userName
         private String password;
         private boolean success;
         private String message;
         private Contact contact;
 
-        public Builder setEmployeeID(String employeeID) {
-            this.employeeID = employeeID;
+        public Builder setEmployeeID(int employeeID) { // Changed parameter type from String to int
+            this.employeeID = employeeID; // Updated to reflect int
             return this;
         }
 
@@ -129,12 +134,7 @@ public class Employee {
             return this;
         }
 
-        public Builder setUserName(String userName) {
-            this.userName = userName;
-            return this;
-        }
-
-        public Builder setJobPosition(String jobPosition) {
+        public Builder setJobPosition(String jobPosition) { // Updated to reflect removal of userName
             this.jobPosition = jobPosition;
             return this;
         }
@@ -160,17 +160,18 @@ public class Employee {
         }
 
         public Builder copy(Employee employee) {
-            this.employeeID = employee.employeeID;
+            this.employeeID = employee.employeeID; // Updated to reflect int
             this.firstName = employee.firstName;
             this.lastName = employee.lastName;
-            this.userName = employee.userName;
-            this.jobPosition = employee.jobPosition;
+            this.jobPosition = employee.jobPosition; // Updated to reflect removal of userName
             this.password = employee.password;
             this.contact = employee.contact;
             return this;
         }
+
         public Employee build() {
             return new Employee(this);
         }
     }
 }
+

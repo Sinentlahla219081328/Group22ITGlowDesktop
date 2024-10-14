@@ -25,7 +25,7 @@ class PaymentControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final String baseURL = "http://localhost:8080/ITGlowDesktop/payment";
+    private final String baseURL = "http://localhost:8080/ITGlow/payment";
 
     private static Payment payment;
 

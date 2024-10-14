@@ -1,3 +1,4 @@
+
 package za.ac.cput.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import java.util.List;
 @RestController
 @CrossOrigin("http://localhost:3004")
 @RequestMapping("/employee")
-
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -23,7 +23,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/read/{employeeID}")
-    public Employee read(@PathVariable Long employeeID) {
+    public Employee read(@PathVariable int employeeID) {
         return employeeService.read(employeeID);
     }
 
@@ -33,25 +33,26 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable int id) {
         employeeService.delete(id);
     }
 
     @GetMapping("/getAll")
     public List<Employee> getAll() {
-        return employeeService.getall();
+        return employeeService.getAll();
     }
 
     @PostMapping("/login")
-    public Employee login(@RequestBody Employee request) {
+    public ResponseEntity<Employee> login(@RequestBody Employee request) {
         Employee response = employeeService.login(request);
         if (response.isSuccess()) {
-            return new Employee(true, "login successful");
+            return new ResponseEntity<>(response, HttpStatus.OK); // Return successful login with OK status
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response).getBody();
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // Return UNAUTHORIZED if login fails
         }
     }
 }
+
 
 
 

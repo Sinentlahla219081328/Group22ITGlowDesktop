@@ -23,27 +23,11 @@ class EmployeeServiceTest {
 
     @Test
     void a_setup() {
-        employee1 = EmployeeFactory.buildEmployee(
-                218130260L,
-                "joka",
-                "zimkhita",
-                "zimmy1",
-                "hairstylist",
-                "627xhq",
-                "aphelele@gmail.com"
-        );
+        employee1 = EmployeeFactory.buildEmployee(218130260, "joka", "zimkhita", "hairstylist", "679xhq", "aphelele@gmail.com",  "0771203510", "0219802222", "true", "Welcome to ITGlow");
         assertNotNull(employee1);
         System.out.println(employee1);
 
-        employee2 = EmployeeFactory.buildEmployee(
-                218902756L,
-                "likhona",
-                "nxusani",
-                "likhs25",
-                "barber",
-                "320pfs",
-                "likhs25@gmail.com"
-        );
+        employee2 = EmployeeFactory.buildEmployee(218902756, "likhona", "Nxusani", "barber", "320pfs", "likhs25@gmail.com", "0847902111", "0215903474", "true", "Welcome to ITGlow");
         assertNotNull(employee2);
         System.out.println(employee2);
     }
@@ -61,7 +45,7 @@ class EmployeeServiceTest {
 
     @Test
     void c_read() {
-        Employee read = employeeService.read(employee1.getIdNumber());  // Use getIdNumber() method
+        Employee read = employeeService.read(employee1.getEmployeeID());
         assertNotNull(read);
         System.out.println(read);
     }
@@ -79,6 +63,7 @@ class EmployeeServiceTest {
 
     @Test
     void e_getall() {
-        System.out.println(employeeService.getall());
+        System.out.println(employeeService.getAll());
     }
 }
+
