@@ -2,16 +2,16 @@ package za.ac.cput.domain;
 
 /*
  Aphelele Zimkhita Joka 218130260
-
  */
 
 import jakarta.persistence.*;
 
 import java.util.Objects;
+
 @Entity
 public class Employee {
     @Id
-    private String employeeID;
+    private Long employeeID;
     private String firstName;
     private String lastName;
     private String userName;
@@ -24,13 +24,11 @@ public class Employee {
     @JoinColumn(name = "email")
     private Contact contact;
 
-
     protected Employee() {
-
     }
 
     private Employee(Builder builder) {
-        this.employeeID= builder.employeeID;
+        this.employeeID = builder.employeeID;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.userName = builder.userName;
@@ -39,15 +37,14 @@ public class Employee {
         this.success = builder.success;
         this.message = builder.message;
         contact = builder.contact;
-
     }
 
-    public Employee (boolean success, String message) {
+    public Employee(boolean success, String message) {
         this.success = success;
         this.message = message;
     }
 
-    public String getEmployeeID() {
+    public Long getEmployeeID() { // Changed from long to Long
         return employeeID;
     }
 
@@ -63,13 +60,21 @@ public class Employee {
         return userName;
     }
 
-    public String getJobPosition() {return jobPosition;}
+    public String getJobPosition() {
+        return jobPosition;
+    }
 
-    public String getPassword() {return password;}
+    public String getPassword() {
+        return password;
+    }
 
-    public boolean isSuccess() {return success;}
+    public boolean isSuccess() {
+        return success;
+    }
 
-    public String getMessage() {return message;}
+    public String getMessage() {
+        return message;
+    }
 
     public Contact getContact() {
         return contact;
@@ -80,7 +85,11 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return success == employee.success && Objects.equals(employeeID, employee.employeeID) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) && Objects.equals(password, employee.password) && Objects.equals(message, employee.message) && Objects.equals(contact, employee.contact);
+        return success == employee.success && Objects.equals(employeeID, employee.employeeID) &&
+                Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(userName, employee.userName) && Objects.equals(jobPosition, employee.jobPosition) &&
+                Objects.equals(password, employee.password) && Objects.equals(message, employee.message) &&
+                Objects.equals(contact, employee.contact);
     }
 
     @Override
@@ -91,7 +100,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeID='" + employeeID + '\'' +
+                "employeeID=" + employeeID +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
@@ -104,7 +113,7 @@ public class Employee {
     }
 
     public static class Builder {
-        private String employeeID;
+        private Long employeeID;
         private String firstName;
         private String lastName;
         private String userName;
@@ -114,7 +123,7 @@ public class Employee {
         private String message;
         private Contact contact;
 
-        public Builder setEmployeeID(String employeeID) {
+        public Builder setEmployeeID(Long employeeID) { // Changed from long to Long
             this.employeeID = employeeID;
             return this;
         }
@@ -169,6 +178,7 @@ public class Employee {
             this.contact = employee.contact;
             return this;
         }
+
         public Employee build() {
             return new Employee(this);
         }

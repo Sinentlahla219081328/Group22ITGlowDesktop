@@ -9,12 +9,12 @@ import za.ac.cput.domain.Employee;
 import za.ac.cput.util.Helper;
 
 public class EmployeeFactory {
-    public static Employee buildEmployee(String employeeID, String firstName, String lastName, String userName
-                                         , String jobPosition, String password, String email, String mobileNumber, String workTelephone, String success, String message) {
-        if (Helper.isNullOrEmpty(employeeID) || Helper.isNullOrEmpty(firstName)
-                || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(userName)
-                || Helper.isNullOrEmpty(jobPosition) || Helper.isNullOrEmpty(password)
-                || Helper.isNullOrEmpty(success)  || Helper.isNullOrEmpty(message)  ) {
+    public static Employee buildEmployee(Long employeeID, String firstName, String lastName, String userName,
+                                         String jobPosition, String password, String email, String mobileNumber, String workTelephone, String success, String message) {
+        if (Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName)
+                || Helper.isNullOrEmpty(userName) || Helper.isNullOrEmpty(jobPosition)
+                || Helper.isNullOrEmpty(password) || Helper.isNullOrEmpty(success)
+                || Helper.isNullOrEmpty(message)) {
             return null;
         }
 
@@ -36,4 +36,3 @@ public class EmployeeFactory {
                 .build();
     }
 }
-

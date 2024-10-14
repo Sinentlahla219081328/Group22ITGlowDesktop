@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IEmployeeService extends  IService <Employee, Long>{
 
-    List<Employee> getall();
+    List<Employee> getAll();
 
 }

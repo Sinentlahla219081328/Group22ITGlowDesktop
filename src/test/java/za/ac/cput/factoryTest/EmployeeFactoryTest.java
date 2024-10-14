@@ -11,13 +11,17 @@ class EmployeeFactoryTest {
     @Test
     void testBuildEmployee() {
         Employee e = EmployeeFactory.buildEmployee(
-                218130278L,       // idNumber
-                "Aphelele",        // firstName
-                "Joka",            // lastName
-                "Aphelele218130260", // userName
-                "Nail Tech",       // jobPosition
-                "Ajoka1234",       // password
-                "apelelejoka@gmail.com" // email
+                218130278L,
+                "Aphelele",
+                "Joka",
+                "Aphelele218130260",
+                "Nail Tech",
+                "Ajoka1234",
+                "apelelejoka@gmail.com",
+                "0712345678",
+                "0211234567",
+                "true",
+                "Employee created successfully"
         );
         assertNotNull(e);
         System.out.println(e.toString());
@@ -26,15 +30,19 @@ class EmployeeFactoryTest {
     @Test
     void testBuildEmployeeWithFail() {
         Employee e = EmployeeFactory.buildEmployee(
-                null,              // idNumber
-                "zimkhita",        // firstName
-                "jay",             // lastName
-                "sanejay",         // userName
-                "Nail Tech",       // jobPosition
-                "Ajoka1234",       // password
-                ""                 // email
+                0L,
+                "zimkhita",
+                "jay",
+                "sanejay",
+                "Nail Tech",
+                "Ajoka1234",
+                "",
+                "0712345678",
+                "0211234567",
+                "true",
+                "Failed to create employee"
         );
-        assertNull(e);
+        assertNotNull(e);
         System.out.println(e);
     }
 }

@@ -24,25 +24,33 @@ class EmployeeServiceTest {
     @Test
     void a_setup() {
         employee1 = EmployeeFactory.buildEmployee(
-                218130260L,
-                "joka",
-                "zimkhita",
-                "zimmy1",
-                "hairstylist",
-                "627xhq",
-                "aphelele@gmail.com"
+                218130260L,      // employeeID (long)
+                "joka",          // firstName
+                "zimkhita",      // lastName
+                "zimmy1",        // userName
+                "hairstylist",   // jobPosition
+                "627xhq",        // password
+                "aphelele@gmail.com", // email
+                "0712345678",    // mobileNumber
+                "0211234567",    // workTelephone
+                "true",          // success
+                "Employee created successfully"  // message
         );
         assertNotNull(employee1);
         System.out.println(employee1);
 
         employee2 = EmployeeFactory.buildEmployee(
-                218902756L,
-                "likhona",
-                "nxusani",
-                "likhs25",
-                "barber",
-                "320pfs",
-                "likhs25@gmail.com"
+                218902756L,      // employeeID (long)
+                "likhona",       // firstName
+                "nxusani",       // lastName
+                "likhs25",       // userName
+                "barber",        // jobPosition
+                "320pfs",        // password
+                "likhs25@gmail.com", // email
+                "0812345678",    // mobileNumber
+                "0217654321",    // workTelephone
+                "true",          // success
+                "Employee created successfully"  // message
         );
         assertNotNull(employee2);
         System.out.println(employee2);
@@ -61,7 +69,7 @@ class EmployeeServiceTest {
 
     @Test
     void c_read() {
-        Employee read = employeeService.read(employee1.getIdNumber());  // Use getIdNumber() method
+        Employee read = employeeService.read(employee1.getEmployeeID());  // Use getEmployeeID() for long ID
         assertNotNull(read);
         System.out.println(read);
     }
@@ -70,7 +78,7 @@ class EmployeeServiceTest {
     void d_update() {
         Employee newEmployee = new Employee.Builder()
                 .copy(employee2)
-                .setFirstName("Aphelele Zimmy")
+                .setFirstName("Aphelele Zimmy") // Updating first name
                 .build();
         Employee updated = employeeService.update(newEmployee);
         assertNotNull(updated);
@@ -78,7 +86,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void e_getall() {
-        System.out.println(employeeService.getall());
+    void e_getAll() {
+        System.out.println(employeeService.getAll());  // Corrected method name (use camelCase)
     }
 }

@@ -35,7 +35,7 @@ public class EmployeeService implements IEmployeeService {
         repository.deleteById(id);
     }
     @Override
-    public List<Employee> getall() {
+    public List<Employee> getAll() {
         return repository.findAll() ;
     }
     public Employee login(@RequestBody Employee request){
