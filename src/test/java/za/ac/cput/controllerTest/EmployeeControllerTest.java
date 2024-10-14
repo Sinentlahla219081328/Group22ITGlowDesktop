@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.Employee;
 import za.ac.cput.factory.EmployeeFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -22,8 +23,8 @@ class EmployeeControllerTest {
 
     @BeforeAll
     public static void setup() {
-
-        employee = EmployeeFactory.buildEmployee(218130260L, "joka", "zimkhita", "zimmy1", "hairstylist", "627xhq", "aphelele@gmail.com", "0712345678", "0211234567", "true", "Employee created successfully");
+        employee = EmployeeFactory.buildEmployee(
+                218130260, "joka", "zimkhita", "hairstylist", "679xhq", "aphelele@gmail.com",  "0771203510", "0219802222", "true", "Welcome to ITGlow");
     }
 
     @Test
@@ -50,16 +51,13 @@ class EmployeeControllerTest {
     @Test
     void c_update() {
         String URL = BASE_URL + "/update";
-        Employee newEmployee = new Employee.Builder()
-                .copy(employee)
-                .setFirstName("Aphelele Joka")
-                .build();
+        Employee newEmployee = new Employee.Builder().copy(employee).setFirstName("Aphelele Joka").build();
         ResponseEntity<Employee> postResponse = restTemplate.postForEntity(URL, newEmployee, Employee.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
         Employee employeeUpdated = postResponse.getBody();
         System.out.println("Updated Employee: " + employeeUpdated);
-        assertEquals(newEmployee.getEmployeeID(), employeeUpdated.getEmployeeID());
+        assertEquals(newEmployee.getEmployeeID(), employeeUpdated.getEmployeeID());  // Changed to getIdNumber
     }
 
     @Disabled
@@ -68,15 +66,16 @@ class EmployeeControllerTest {
         String URL = BASE_URL + "/delete/" + employee.getEmployeeID();
         System.out.println("URL: " + URL);
         restTemplate.delete(URL);
-        System.out.println("Success: Deleted employee");
+        System.out.println("Success: Deleted user");
     }
 
     @Test
     void e_getAll() {
         String URL = BASE_URL + "/getAll";
         ResponseEntity<String> response = restTemplate.getForEntity(URL, String.class);
-        System.out.println("Show All Employees: ");
+        System.out.println("Show All: ");
         System.out.println(response);
         System.out.println(response.getBody());
     }
 }
+

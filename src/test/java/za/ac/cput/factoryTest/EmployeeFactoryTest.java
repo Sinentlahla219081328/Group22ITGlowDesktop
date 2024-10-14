@@ -11,17 +11,16 @@ class EmployeeFactoryTest {
     @Test
     void testBuildEmployee() {
         Employee e = EmployeeFactory.buildEmployee(
-                218130278L,
-                "Aphelele",
-                "Joka",
-                "Aphelele218130260",
-                "Nail Tech",
-                "Ajoka1234",
-                "apelelejoka@gmail.com",
-                "0712345678",
-                "0211234567",
-                "true",
-                "Employee created successfully"
+                218130278,        // employeeID as int
+                "Aphelele",       // firstName
+                "Joka",           // lastName
+                "Nail Tech",      // jobPosition
+                "Ajoka1234",      // password
+                "apelelejoka@gmail.com", // email
+                "0712345678",     // mobileNumber (new parameter)
+                "0112345678",     // workTelephone (new parameter)
+                "true",           // success
+                "Employee created successfully" // message
         );
         assertNotNull(e);
         System.out.println(e.toString());
@@ -30,19 +29,19 @@ class EmployeeFactoryTest {
     @Test
     void testBuildEmployeeWithFail() {
         Employee e = EmployeeFactory.buildEmployee(
-                0L,
-                "zimkhita",
-                "jay",
-                "sanejay",
-                "Nail Tech",
-                "Ajoka1234",
-                "",
-                "0712345678",
-                "0211234567",
-                "true",
-                "Failed to create employee"
+                0,                // employeeID (invalid value)
+                "zimkhita",       // firstName
+                "jay",            // lastName
+                "Nail Tech",      // jobPosition
+                "Ajoka1234",      // password
+                "",               // email
+                null,             // mobileNumber (new parameter)
+                null,             // workTelephone (new parameter)
+                "false",          // success
+                "Failed to create employee" // message
         );
         assertNotNull(e);
         System.out.println(e);
     }
 }
+
