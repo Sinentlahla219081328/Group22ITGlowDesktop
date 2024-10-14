@@ -10,8 +10,9 @@ import za.ac.cput.service.EmployeeService;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3004")
 @RequestMapping("/employee")
-@CrossOrigin("http://localhost/3004")
+
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -22,7 +23,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/read/{employeeID}")
-    public Employee read(@PathVariable String employeeID) {
+    public Employee read(@PathVariable Long employeeID) {
         return employeeService.read(employeeID);
     }
 
@@ -32,12 +33,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable Long id) {
         employeeService.delete(id);
     }
 
-    @GetMapping("/getall")
-    public List<Employee> getall() {
+    @GetMapping("/getAll")
+    public List<Employee> getAll() {
         return employeeService.getall();
     }
 
