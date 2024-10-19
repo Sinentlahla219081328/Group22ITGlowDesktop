@@ -17,7 +17,7 @@ class ClientControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final String BASE_URL = "http://localhost:8080/ITGlowDesktop/client";
+    private final String BASE_URL = "http://localhost:8080/ITGlow/client";
 
     private static Client client;
 

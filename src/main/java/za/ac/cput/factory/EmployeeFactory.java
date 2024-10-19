@@ -1,3 +1,4 @@
+
 package za.ac.cput.factory;
 
 /*
@@ -9,12 +10,12 @@ import za.ac.cput.domain.Employee;
 import za.ac.cput.util.Helper;
 
 public class EmployeeFactory {
-    public static Employee buildEmployee(String employeeID, String firstName, String lastName, String userName
-                                         , String jobPosition, String password, String email, String mobileNumber, String workTelephone, String success, String message) {
-        if (Helper.isNullOrEmpty(employeeID) || Helper.isNullOrEmpty(firstName)
-                || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(userName)
-                || Helper.isNullOrEmpty(jobPosition) || Helper.isNullOrEmpty(password)
-                || Helper.isNullOrEmpty(success)  || Helper.isNullOrEmpty(message)  ) {
+    public static Employee buildEmployee(int employeeID, String firstName, String lastName, String jobPosition,
+                                         String password, String email, String mobileNumber,
+                                         String workTelephone, String success, String message) {
+        if (Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) ||
+                Helper.isNullOrEmpty(jobPosition) || Helper.isNullOrEmpty(password) ||
+                Helper.isNullOrEmpty(success) || Helper.isNullOrEmpty(message)) {
             return null;
         }
 
@@ -24,11 +25,11 @@ public class EmployeeFactory {
             return null;
         }
 
-        return new Employee.Builder().setEmployeeID(employeeID)
+        return new Employee.Builder()
+                .setEmployeeID(employeeID) // Updated to accept int
                 .setFirstName(firstName)
                 .setLastName(lastName)
-                .setUserName(userName)
-                .setJobPosition(jobPosition)
+                .setJobPosition(jobPosition) // Updated to reflect removal of userName
                 .setPassword(password)
                 .setMessage(message)
                 .setSuccess(Boolean.parseBoolean(success))

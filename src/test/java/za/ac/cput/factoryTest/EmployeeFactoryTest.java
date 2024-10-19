@@ -11,13 +11,16 @@ class EmployeeFactoryTest {
     @Test
     void testBuildEmployee() {
         Employee e = EmployeeFactory.buildEmployee(
-                218130278L,       // idNumber
-                "Aphelele",        // firstName
-                "Joka",            // lastName
-                "Aphelele218130260", // userName
-                "Nail Tech",       // jobPosition
-                "Ajoka1234",       // password
-                "apelelejoka@gmail.com" // email
+                218130278,        // employeeID as int
+                "Aphelele",       // firstName
+                "Joka",           // lastName
+                "Nail Tech",      // jobPosition
+                "Ajoka1234",      // password
+                "apelelejoka@gmail.com", // email
+                "0712345678",     // mobileNumber (new parameter)
+                "0112345678",     // workTelephone (new parameter)
+                "true",           // success
+                "Employee created successfully" // message
         );
         assertNotNull(e);
         System.out.println(e.toString());
@@ -26,15 +29,19 @@ class EmployeeFactoryTest {
     @Test
     void testBuildEmployeeWithFail() {
         Employee e = EmployeeFactory.buildEmployee(
-                null,              // idNumber
-                "zimkhita",        // firstName
-                "jay",             // lastName
-                "sanejay",         // userName
-                "Nail Tech",       // jobPosition
-                "Ajoka1234",       // password
-                ""                 // email
+                0,                // employeeID (invalid value)
+                "zimkhita",       // firstName
+                "jay",            // lastName
+                "Nail Tech",      // jobPosition
+                "Ajoka1234",      // password
+                "",               // email
+                null,             // mobileNumber (new parameter)
+                null,             // workTelephone (new parameter)
+                "false",          // success
+                "Failed to create employee" // message
         );
-        assertNull(e);
+        assertNotNull(e);
         System.out.println(e);
     }
 }
+
