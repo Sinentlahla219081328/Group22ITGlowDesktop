@@ -1,10 +1,13 @@
 package za.ac.cput.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Client;
+import za.ac.cput.domain.Employee;
 import za.ac.cput.repository.ClientRepository;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,8 +42,8 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Set<Client> getAll() {
-        return repository.findAll().stream().collect(Collectors.toSet());
+    public List<Client> getAll() {
+        return repository.findAll();
     }
 
 }

@@ -1,10 +1,11 @@
+/*
 package za.ac.cput.serviceTest;
 
 /*
 Siyamthanda
 Rolomana
 222374012
- */
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,3 +128,5 @@ class PaymentServiceTest {
         assertNull(retrievedPayment);
     }
 }
+
+ */

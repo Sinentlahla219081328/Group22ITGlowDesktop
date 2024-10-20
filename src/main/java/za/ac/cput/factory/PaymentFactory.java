@@ -1,10 +1,11 @@
+/*
 package za.ac.cput.factory;
 
 /*
  Siyamthanda
  Rolomana
 222374012
- */
+
 
 import za.ac.cput.domain.Client;
 import za.ac.cput.domain.Payment;
@@ -44,11 +45,11 @@ public class PaymentFactory {
                 Helper.isNullOrEmpty(userID) ||
                 amount <= 0 ||
                 Helper.isNullOrEmpty(paymentMethod) ||
-                datePaid == null  || Helper.isNullOrEmpty(clientId) || Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName))
+                datePaid == null  || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName))
             return null;
 
 
-        Client client = new Client.Builder().setClientId(clientId)
+        Client client = new Client.Builder().setEmail(email)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .build();
@@ -64,3 +65,7 @@ public class PaymentFactory {
                 .build();
     }
 }
+
+ */
+
+

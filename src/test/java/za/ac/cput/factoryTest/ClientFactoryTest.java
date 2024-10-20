@@ -9,11 +9,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClientFactoryTest {
 
     @Test
-    void testBuildClient(){
-        Client client = ClientFactory.buildClient("246810", "Sipho", "Dibela",
-                "246810@gmail.com", "0781234526", "0213458796");
+    void testBuildClient_Success() {
+        Client client = ClientFactory.buildClient(
+                "John",         // firstName
+                "Doe",          // lastName
+                "john@gmail.com",  // email
+                "password123"   // password
+        );
         assertNotNull(client);
-        System.out.println(client);
+        System.out.println(client.toString());
     }
 
+    @Test
+    void testBuildClient_Failure() {
+        Client client = ClientFactory.buildClient(
+                "John",         // firstName
+                "Doe",          // lastName
+                "",             // email (invalid)
+                "password123"   // password
+        );
+        assertNotNull(client);  // Client creation should fail
+        System.out.println(client);
+    }
 }

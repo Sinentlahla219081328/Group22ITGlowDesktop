@@ -8,26 +8,22 @@ import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.Client;
 import za.ac.cput.factory.ClientFactory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ClientControllerTest {
+
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final String BASE_URL = "http://localhost:8080/ITGlow/client";
-
+    private final String BASE_URL = "http://localhost:8080/WebSecurity/client";
     private static Client client;
 
     @BeforeAll
-    public static void setup(){
-
-        client = ClientFactory.buildClient("5788", "Liks", "Nxusani", "Likhona@gmail.com", "0723451632", "0215734628");
-
+    public static void setup() {
+        client = ClientFactory.buildClient("Sipho", "Dibela", "siphodibela@gmail.com", "password123");
     }
-
 
     @Test
     void a_create() {
@@ -36,37 +32,39 @@ class ClientControllerTest {
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
         Client clientSaved = postResponse.getBody();
-        assertEquals(client.getClientId(), clientSaved.getClientId());
+        assertEquals(client.getEmail(), clientSaved.getEmail());
         System.out.println("Created Client: " + clientSaved);
-
     }
 
     @Test
     void b_read() {
-        String URL = BASE_URL + "/read/" + client.getClientId();
+        String URL = BASE_URL + "/read/" + client.getEmail();
         System.out.println("URL: " + URL);
         ResponseEntity<Client> response = restTemplate.getForEntity(URL, Client.class);
         assertNotNull(response.getBody());
         System.out.println("Read Client: " + response.getBody());
-        assertEquals(client.getClientId(), response.getBody().getClientId());
+        assertEquals(client.getEmail(), response.getBody().getEmail());
     }
 
     @Test
     void c_update() {
         String URL = BASE_URL + "/update";
-        Client newClient = new Client.Builder().copy(client).setFirstName("Likhona").build();
-        ResponseEntity<Client> postResponse = restTemplate.postForEntity(URL, newClient, Client.class);
+        Client updatedClient = new Client.Builder()
+                .copy(client)
+                .setFirstName("Zigalo")
+                .build();
+        ResponseEntity<Client> postResponse = restTemplate.postForEntity(URL, updatedClient, Client.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
         Client clientUpdated = postResponse.getBody();
         System.out.println("Updated Client: " + clientUpdated);
-        assertEquals(newClient.getClientId(), clientUpdated.getClientId());
+        assertEquals(updatedClient.getEmail(), clientUpdated.getEmail());
     }
 
     @Disabled
     @Test
     void d_delete() {
-        String URL = BASE_URL + "/delete/" + client.getClientId();
+        String URL = BASE_URL + "/delete/" + client.getEmail();
         System.out.println("URL: " + URL);
         restTemplate.delete(URL);
         System.out.println("Success: Deleted client");
@@ -76,8 +74,7 @@ class ClientControllerTest {
     void e_getAll() {
         String URL = BASE_URL + "/getAll";
         ResponseEntity<String> response = restTemplate.getForEntity(URL, String.class);
-        System.out.println("Show All: ");
-        System.out.println(response);
+        System.out.println("Show All Clients: ");
         System.out.println(response.getBody());
     }
 }
