@@ -3,92 +3,111 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function EmployeeManager() {
-  // Employee List State
-  interface Employee {
-    employeeID: number;
-    firstName: string;
-    lastName: string;
-    jobPosition: string;
-    userName: string;
-    password: string;
-    email: string;
-    mobileNumber: string;
-    workTelephone: string;
-  }
-  
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const [showForm, setShowForm] = useState(false);
 
   // Form State
   const [employeeID, setEmployeeID] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [jobPosition, setJobPosition] = useState('');
-  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [workTelephone, setWorkTelephone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
+ // const [contact, setContact] = useState('');
 
-  // Fetch employees
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/ITGlowDesktop/employee/getall');
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-    fetchEmployees();
-  }, []);
-
+const contact = {email, mobileNumber,workTelephone};
   // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     const employee = {
-      employeeID, firstName, lastName, jobPosition, userName, password, email, mobileNumber, workTelephone
-    };
-
-    try {
-      const response = await fetch("http://localhost:8080/ITGlowDesktop/employee/create", {
+      employeeID,
+      firstName,
+      lastName,
+      jobPosition,
+      password,
+      contact
+     
+  };
+try{
+    
+      const response = await fetch("http://localhost:8080/ITGlow/employee/create", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(employee),
       });
-
       if (response.ok) {
-        setMessage('Employee created successfully');
-        // Reset form fields
-        setEmployeeID('');
-        setFirstName('');
-        setLastName('');
-        setJobPosition('');
-        setUserName('');
-        setPassword('');
-        setEmail('');
-        setMobileNumber('');
-        setWorkTelephone('');
-        // Refetch employee list
-        const updatedEmployees = await axios.get('http://localhost:8080/ITGlowDesktop/employee/getall');
-        setEmployees(updatedEmployees.data);
-        setShowForm(false); // Hide form after successful addition
-      } else {
-        setMessage('Failed to create employee');
-      }
+        // Handle successful response
+        console.log('Employee created successfully');
+        clearF;
+
+    } else {
+        // Handle error response
+        console.error('Failed to create employee');
+    }
+}
+catch(error) {
+  console.error('Network error' ,error);
+}finally{
+
+    e.preventDefault();
+    setIsSubmitting(false);
+}};
+   
+const updateUser = async (id: number, userData: { name: string; email: string; }) => {
+  try {
+      const response = await axios.put(`http://localhost:8080/ITGlow/employee/update/${id}`, userData);
+      console.log('User updated successfully:', response.data);
+  } catch (error) {
+      console.error('Error updating user:', error);
+  }
+};
+interface Employee {
+  employeeID : number;
+  firstName : String;
+  lastName: String;
+  jobPosition: String;
+  userName: String;
+  password: String;
+  email: String;
+  mobileNumber: String;
+  workTelephone: String;
+  }
+  const [employee, setEmployees] = useState<Employee[]>([]);
+   
+ useEffect(() => {
+  const fetch = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/ITGlow/employee/getall');
+      setEmployees(response.data);
     } catch (error) {
-      console.error('Failed to create employee:', error);
-      setMessage('An error occurred. Please try again.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('Error fetching schedules:', error);
     }
   };
+  fetch();
+}, []);
+const clearF =async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+setEmployeeID ('');
+setFirstName ('');
+setLastName ('');
+setJobPosition ('');
+setPassword ('');
+setEmail('');
+setMobileNumber('');
+setWorkTelephone('');
+ 
+}
+//const showForm =
+  const [showForm, setShowForm] = useState(false);
+  
+  
 
   return (
     <main className="flex min-h-screen flex-col p-6 bg-[url('/salon.jpg')] bg-cover bg-center">
@@ -189,17 +208,6 @@ export default function EmployeeManager() {
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">Username</label>
-                <input
-                  type="text"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Username"
-                  className="w-full p-3 border rounded-md"
-                  required
-                />
-              </div>
-              <div>
                 <label className="block mb-2 text-sm font-medium text-gray-700">Password</label>
                 <input
                   type="password"
@@ -239,15 +247,7 @@ export default function EmployeeManager() {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee) => (
-              <tr key={employee.employeeID}>
-                <td className="py-2 border">{employee.employeeID}</td>
-                <td className="py-2 border">{employee.firstName}</td>
-                <td className="py-2 border">{employee.lastName}</td>
-                <td className="py-2 border">{employee.email}</td>
-                <td className="py-2 border">{employee.jobPosition}</td>
-              </tr>
-            ))}
+            
           </tbody>
         </table>
       </div>
