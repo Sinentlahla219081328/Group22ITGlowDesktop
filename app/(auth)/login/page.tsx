@@ -11,7 +11,7 @@ interface Employee {
 
 const login = async (username: string, password: string): Promise<Employee> => {
   try {
-    const response = await axios.post<Employee>('http://localhost:8081/ITGlowDesktop/employee', {
+    const response = await axios.post<Employee>('http://localhost:8080/ITGlow/employee', {
       username,
       password,
     });
