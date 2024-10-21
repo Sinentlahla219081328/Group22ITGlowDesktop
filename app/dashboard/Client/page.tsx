@@ -2,27 +2,18 @@
 import React, { useState } from 'react';
 
 export default function ClientRegistration() {
-  const [clientId, setClientId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate password and confirm password match
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match. Please try again.');
-      return;
-    }
+    const client = { firstName, lastName, email, password };
 
-    const client = { clientId, firstName, lastName, email, mobileNumber, password };
-
-    const response = await fetch('http://localhost:8080/ITGlowDesktop/client/create', {
+    const response = await fetch('http://localhost:8080/ITGlow/client/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,15 +22,12 @@ export default function ClientRegistration() {
     });
 
     if (response.ok) {
-      setMessage('Client registered successfully. You can log in using your mobile number and password.');
+      setMessage('Client registered successfully. You can log in using your email and password.');
       // Reset form fields after successful registration
-      setClientId('');
       setFirstName('');
       setLastName('');
       setEmail('');
-      setMobileNumber('');
       setPassword('');
-      setConfirmPassword('');
     } else {
       setMessage('Failed to register client. Please try again.');
     }
@@ -78,27 +66,6 @@ export default function ClientRegistration() {
               />
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">Client Identification Number</label>
-              <input
-                type="text"
-                value={clientId}
-                onChange={(e) => setClientId(e.target.value)}
-                placeholder="Client Identification Number"
-                className="w-full p-3 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">Mobile Number</label>
-              <input
-                type="text"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
-                placeholder="Enter Mobile Number"
-                className="w-full p-3 border rounded-md"
-                required
-              />
-            </div>
-            <div>
               <label className="block mb-2 text-sm font-medium text-gray-700">Email Address</label>
               <input
                 type="email"
@@ -116,17 +83,6 @@ export default function ClientRegistration() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create Password"
-                className="w-full p-3 border rounded-md"
-                required
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">Confirm Password</label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm Password"
                 className="w-full p-3 border rounded-md"
                 required
               />
