@@ -23,8 +23,7 @@ class ClientServiceTest {
 
     @Test
     void a_setup() {
-        client = ClientFactory.buildClient("246810", "Sipho", "Dibela",
-                "246810@gmail.com", "0781234526", "0213458796");
+        client = ClientFactory.buildClient("Sipho", "Dibela", "siphodibela@gmail.com", "password123");
         assertNotNull(client);
         System.out.println(client);
     }
@@ -38,7 +37,7 @@ class ClientServiceTest {
 
     @Test
     void c_read() {
-        Client read = service.read(client.getClientId());
+        Client read = service.read(client.getEmail()); // Use email as the identifier
         assertNotNull(read);
         System.out.println(read);
     }
@@ -56,6 +55,7 @@ class ClientServiceTest {
     @Test
     @Disabled
     void f_delete() {
+        // You can implement this if needed in the future
     }
 
     @Test

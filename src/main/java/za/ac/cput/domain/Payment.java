@@ -1,10 +1,11 @@
+/*
 package za.ac.cput.domain;
 
 /*
 Siyamthanda
 Rolomana
 222374012
- */
+
 
 import jakarta.persistence.*;
 
@@ -23,7 +24,7 @@ public class Payment {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "clientId", referencedColumnName = "clientId")
+    @JoinColumn(name = "email", referencedColumnName = "email")
     private Client client;
 
     public Payment() {
@@ -159,3 +160,5 @@ public class Payment {
         }
     }
 }
+
+ */

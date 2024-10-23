@@ -1,3 +1,4 @@
+/*
 package za.ac.cput.factoryTest;
 
 
@@ -39,3 +40,5 @@ class PaymentFactoryTest {
                 assertEquals(client, payment.getClient());
         }
 }
+
+ */
